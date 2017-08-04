@@ -34,11 +34,13 @@
   export default {
     data(){
       return{
-        users:[]
+        users:[],
+        isd:''
       }
     },
     created(){
       this.users = JSON.parse(localStorage.getItem("users"));
+      this.isd = localStorage.getItem("is_distribut")
 
       Vue.nextTick(function(){
       })
@@ -49,7 +51,7 @@
         }
       },
       TGActive : function(){
-        if(this.$route.path == '/home/spread'){
+        if(this.$route.path == '/home/spread'|| this.$route.path == '/home/lding'){
           return true
         }
       },userActive:function(){
@@ -63,13 +65,13 @@
         if(this.users == null){
           this.$router.push('/login')
         }
-       else if(this.users.is_distribut == 1){
+       else if(this.isd == 1){
           this.$router.push('/apply')
-       } else if(this.users.is_distribut == 3){
+       } else if(this.isd == 3){
            this.$router.push('/home/spread')
        }
        else{
-         
+         this.$router.push('/home/lding')
        }
 
       },isUser(){

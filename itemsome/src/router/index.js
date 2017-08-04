@@ -11,7 +11,7 @@ import Router from 'vue-router'
 
 
 
-//import gongyi from '../components/publis_spirited/publis.vue' /*gongyi*/
+//import gongyi from '../components/publis_spirited/code.vue' /*gongyi*/
 
 
 
@@ -82,6 +82,11 @@ export default new Router({
                     name: 'spread',
                     component: resolve => require(['../components/spread/spread.vue'], resolve)
                 },
+              {
+                path: 'lding',
+                name: 'lding',
+                component: resolve => require(['../components/lding/lding.vue'], resolve)
+              },
                 {
                     path: 'conv',
                     name: 'conv',
@@ -188,7 +193,12 @@ export default new Router({
             name: 'gongyi',
             /*gongyi*/
             component: resolve => require(['../components/publis_spirited/publis.vue'], resolve)
-        },
+        },{
+        path: '/code',
+        name: 'code',
+        /*code*/
+        component: resolve => require(['../components/code/code.vue'], resolve)
+      },
         {
             path: '/orderAll',
             name: 'orderAll',

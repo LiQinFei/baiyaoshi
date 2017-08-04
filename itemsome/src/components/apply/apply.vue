@@ -38,7 +38,7 @@
             开户行
           </div>
            <input type="text" v-model="bankT" placeholder="请输入您的开户行地址">
-          
+
         </li>
       </ul>
     </div>
@@ -121,10 +121,10 @@
         </li>
       </ul>
     </div>
-   
-    
+
+
       <div class="aui-btn aui-btn-warning aui-btn-block" @click="send()">提交注册申请</div>
-  
+
 
   </div>
 </template>
@@ -138,8 +138,7 @@
         imgtwo : '',
         imgthree : '',
         imgfour : '',
-        num: '',
-        boos: false,
+
         phone:'',
         name:'',
         sex:'',
@@ -150,9 +149,9 @@
     }, computed : {}, methods : {
       send() {
         let that = this
-        if (!(/^1(3|4|5|7|8)\d{9}$/.test(this.phone))) {
+        if (this.imgone=='' || this.imgtwo=='' || this.imgthree =='' || this.imgfour == '' || this.phone ==''|| this.name =='' || this.sex ==''|| this.bankNum ==''||this.bankT =='' || this.userNum =='') {
           toast.fail({
-            title:"手机号码格式不正确",
+            title:"资料不能有空",
             duration:1000
           });
         } else {
@@ -179,11 +178,15 @@
           }).then(function (res) {
             toast.hide();
             if (res.data.status == 1) {
-             
+
               toast.success({
                 title:res.data.msg,
-                duration:1000
+                duration:2000
               });
+              /*let obj = JSON.stringify({"is_distribut": res.data.result.is_distribut });*/
+              localStorage.setItem('is_distribut',2);
+              that.$router.push('/home/lding')
+
             } else {
               toast.fail({
                 title:res.data.msg,
@@ -208,7 +211,7 @@
           let imgSize = file.size;
 
 
-          if(imgSize < 1024 * 1024 / 2){
+          if(imgSize < 1024 * 1024 *1.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -218,7 +221,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于500k",
+              title:"图片必须小于1500k",
               duration:1000
             });
           }
@@ -227,7 +230,7 @@
           let file = document.getElementById('twos').files[0];
           let imgSize = file.size;
 
-          if(imgSize < 1024 * 1024 / 2){
+          if(imgSize < 1024 * 1024 *1.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -237,7 +240,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于500k",
+              title:"图片必须小于1500k",
               duration:1000
             });
           }
@@ -246,7 +249,7 @@
         $("#threes").change(function(){
           let file = document.getElementById('threes').files[0];
           let imgSize = file.size;
-          if(imgSize < 1024 * 1024 / 2){
+          if(imgSize < 1024 * 1024 *1.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -256,7 +259,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于500k",
+              title:"图片必须小于1500k",
               duration:1000
             });
           }
@@ -265,7 +268,7 @@
         $("#fours").change(function(){
           let file = document.getElementById('fours').files[0];
           let imgSize = file.size;
-          if(imgSize < 1024 * 1024 / 2){
+          if(imgSize < 1024 * 1024 *1.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -275,7 +278,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于500k",
+              title:"图片必须小于1500k",
               duration:1000
             });
           }

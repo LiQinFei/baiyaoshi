@@ -5,6 +5,7 @@
         <img  v-bind:src="datas.head_pic" alt="">
       </div>
       <div class="sh_r">
+        <div class="erwei" @click="imgs()"><img :src="datas.user_qrcode" alt=""></div>
         <p class="name">{{datas.nickname}}</p>
         <p class="num">推广账号：{{datas.check_code }}</p>
         <div class="line"></div>
@@ -71,7 +72,7 @@ export default {
       }).then(function (res) {
         // that.nums = res.data
         // console.log(that.nums)
-       
+
          that.datas = res.data
         console.log(that.datas)
 
@@ -110,6 +111,12 @@ export default {
     downJ: function () {
 
       $('.user').css({ 'bottom': '6.3rem', 'left': '79%' });
+    },
+    imgs:function(){
+        if(this.datas.user_qrcode){
+          this.$router.push({ name: 'code', params: { imgUrl: this.datas.user_qrcode }})
+        }
+
     }
   }
 }
@@ -136,6 +143,19 @@ export default {
     .sh_r {
       flex: 1;
       padding-left: 0.5rem;
+      position:relative;
+      .erwei{
+        position:absolute;
+        width:1rem;
+        height:1rem;
+
+        right:1rem;
+        top:0.5rem;
+        img{
+          width:100%;
+          height:100%;
+        }
+      }
       .name {
         font-size: 0.7rem;
         color: #FFFFFB;

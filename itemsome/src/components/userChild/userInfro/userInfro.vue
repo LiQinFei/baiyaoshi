@@ -92,6 +92,10 @@ export default {
   }, methods: {
     save() {
       let that = this
+      toast.loading({
+        title:"加载中",
+        duration:2000
+      });
       this.$http({
         method: 'post',
         url: commonUrl + api + "/index.php?m=Mobile&c=user&a=userinfosave",
@@ -104,14 +108,14 @@ export default {
         }
       }).then(function (res) {
         if (res.data.status == 1) {
-
+          toast.hide()
           toast.success({
             title:res.data.msg,
             duration:2000
           });
-
+          that.$router.push('/home/user')
         } else {
-
+          toast.hide()
           toast.fail({
             title:res.data.msg,
             duration:2000

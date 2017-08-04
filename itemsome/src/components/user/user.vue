@@ -3,11 +3,11 @@
     <router-link to="/userInfor">
       <div class="user_head">
         <div class="sh_l">
-          <img src="./xtx.png" alt="">
+          <img :src="datas.head_pic">
         </div>
         <div class="sh_r">
-          <p class="name">Chasser</p>
-          <p class="num">推广账号：by987932</p>
+          <p class="name">{{datas.nickname}}</p>
+          <p class="num">账号：{{datas.mobile}}</p>
           <i class="aui-iconfont aui-icon-right"></i>
         </div>
       </div>
@@ -148,14 +148,40 @@
 </template>
 
 <script>
+  import Vue from 'vue'
 export default {
   data(){
     return{
-      users:[]
+      users:[],
+      datas:[]
     }
   },
   created() {
     this.users = JSON.parse(localStorage.getItem("users"));
+
+    let that = this;
+    Vue.nextTick(function () {
+      that.$http({
+        method: 'post',
+        url: commonUrl + api + "/index.php?m=Mobile&c=user&a=userinfo",
+        data: {
+          user_id: that.users.user_id
+        }
+      }).then(function (res) {
+        // that.nums = res.data
+        // console.log(that.nums)
+        that.datas = res.data
+        console.log(that.datas)
+
+
+
+
+
+
+      }).catch(function (err) {
+        console.log('网络错误')
+      })
+    })
   }, beforeRouteEnter(to, from, next) {
     let oo = JSON.parse(localStorage.getItem("users"));
     if (oo == null) {
@@ -190,6 +216,8 @@ export default {
       flex: 0 0 3.5rem;
       img {
         width: 100%;
+        height:100%;
+
       }
     }
     .sh_r {

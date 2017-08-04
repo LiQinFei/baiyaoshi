@@ -79,6 +79,7 @@ export default {
           toast.hide()
           if (res.data.status == 1) {
             let obj = JSON.stringify({ "user_id": res.data.result.user_id, "is_distribut": res.data.result.is_distribut });
+            localStorage.setItem("is_distribut", res.data.result.is_distribut)
             localStorage.setItem("users", obj);
             toast.success({
               title:res.data.msg,
@@ -92,6 +93,7 @@ export default {
             } else {
               that.$router.push(that.form);
             }
+
 
           } else {
 

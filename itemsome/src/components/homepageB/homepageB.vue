@@ -12,18 +12,7 @@
       <div  class="menu_r">
         <transition name="fade">
           <ul v-if="show">
-            <li><router-link to="/home/homepage/homepageSort">wifi放大器</router-link></li>
-            <li><router-link to="/home/homepage/homepageSort">无线网卡</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">无线呼叫器</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">投影仪</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">和田玉</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">钻戒</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">铂金</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">珍珠</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">女表</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">儿童表</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">学生表</router-link> </li>
-            <li><router-link to="/home/homepage/homepageSort">情侣表</router-link> </li>
+            <li v-for="item in datas"><router-link to="/home/homepage/homepageSort">{{item.mobile_name}}</router-link></li>
           </ul>
         </transition>
       </div>
@@ -149,19 +138,35 @@
   export default {
     data(){
       return{
+
         show: false,
         showl: false,
-
+        datas:[]
       }
     },
     created(){
+      let that = this
       Vue.nextTick(function () {
         let mySwiper = new Swiper ('.swiper-container', {
           direction: 'horizontal',
           loop: true,
           pagination: '.swiper-pagination',
           autoplay : 3000
+        })
+        that.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=categoryList"
+        }).then(function (res) {
+          // that.nums = res.data
+          // console.log(that.nums)
 
+          that.datas = res.data
+          console.log(that.datas)
+
+
+
+        }).catch(function (err) {
+          console.log('网络错误')
         })
 
       })
@@ -213,12 +218,19 @@
             width: 25%;
             text-align: center;
             height: 1.6rem;
+            overflow:hidden;
+            white-space:nowrap;
+            padding:0 0.3rem;
             a{
               display: inline-block;
-              padding: 0 0.6rem;
+              margin-top:0.2rem;
               border: 1px solid #dddddd;
               border-radius: 15px;
               font-size: 0.6rem;
+              width:100%;
+              overflow:hidden;
+              padding:0 0.1rem;
+
             }
           }
         }

@@ -40,12 +40,13 @@ export default {
       passtwo: '',
       code: '',
       tuima:'',
-      
+
     }
   },
   created() {
-   
-      this.tuima = this.$route.query.code 
+
+      this.tuima = this.$route.query.code
+    console.log(this.tuima)
   },
   methods: {
     //发送验证码
@@ -129,7 +130,7 @@ export default {
           title:'两次密码不正确',
           duration:1000
         });
-      } else if (this.tuima == '') {
+      } else if (this.tuima == null) {
         toast.fail({
           title:'推广员不能为空',
           duration:1000
@@ -149,7 +150,7 @@ export default {
             mobile_code: this.code,
             code:this.tuima,
             scene: 1
-            
+
           }
         }).then(function (res) {
             toast.hide()
