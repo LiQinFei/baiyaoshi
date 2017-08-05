@@ -23,7 +23,7 @@
     <div class="home_c">
       <ul class="list">
         <li>
-          <router-link to="/details">
+          <router-link to="/details/baiyao">
             <div class="listL">
               <img src="./1.png" alt="">
             </div>

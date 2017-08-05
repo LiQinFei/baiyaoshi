@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-view></router-view>
+    <keep-alive><router-view></router-view></keep-alive>
     <v-foot></v-foot>
   </div>
 </template>

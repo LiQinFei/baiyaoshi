@@ -49,10 +49,10 @@
           <div>活动优惠</div>
           <div>￥0</div>
         </li>
-        <li>
-          <div>发票类型</div>
-          <div>电子发票</div>
-        </li>
+        <!--<li>-->
+          <!--<div>发票类型</div>-->
+          <!--<div>电子发票</div>-->
+        <!--</li>-->
         <li>
           <div>发票内容</div>
           <div>购买商品明细</div>
@@ -81,7 +81,8 @@
           nums:[
             {ipone:'15888555555',add:'广东省深圳市南山区洱海大道冰海大道87号55'}
           ],
-          qwerqwre:"0"
+          qwerqwre:"0",
+          datas:[]
         }
 
 
@@ -121,7 +122,35 @@
         this.qwerqwre = index;
       }
     ,payfor:function(){
-        window.location = 'https://one.teegon.com/buy/createorder?id=05a08df24b1ce9dc726ad6a14a87098e'
+          let that = this
+        toast.loading({
+          title:"正在加载",
+          duration:1000
+        });
+        this.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
+          data: {
+            user_id: that.users.user_id
+
+          }
+        }).then(function (res) {
+          // that.nums = res.data
+          toast.hide();
+          // console.log(that.nums)
+        if(res.data.status == 1){
+
+          window.location = 'https://one.teegon.com/buy/createorder?id=05a08df24b1ce9dc726ad6a14a87098e'
+
+        }
+
+
+
+
+        }).catch(function (err) {
+          console.log('网络错误')
+        })
+
 
        }
     }

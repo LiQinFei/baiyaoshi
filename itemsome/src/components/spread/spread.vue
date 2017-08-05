@@ -11,6 +11,7 @@
         <div class="line"></div>
         <span>推广金额：{{datas.much}}元</span>
         <span>推广人数：{{datas.underling_number}}人</span>
+        <p class="num">推广人:{{datas.user_ang}}</p>
       </div>
     </div>
     <div class="rank">
@@ -31,6 +32,10 @@
       <img @click="downT" class="tong" src="./tong.png" alt="">
       <img @click="downY" class="yin" src="./yin.png" alt="">
       <img @click="downJ" class="jin" src="./jin.png" alt="">
+    </div>
+
+    <div class="codes">
+      <img :src="datas.user_qrcode" alt="">
     </div>
     <div class="instruction">
       <h2>推广系统介绍</h2>
@@ -75,8 +80,6 @@ export default {
 
          that.datas = res.data
         console.log(that.datas)
-
-
        let levels = res.data.lever-1
 
          $('.user').css({ 'left': that.posi[levels][0], 'bottom': that.posi[levels][1] });
@@ -125,8 +128,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .spread {
-  height: 90%;
+  height: 100%;
   width: 100%;
+  padding-bottom: 5em;
   overflow: auto;
   .spread_head {
     width: 100%;
@@ -138,6 +142,7 @@ export default {
       flex: 0 0 3.5rem;
       img {
         width: 100%;
+        height: 100%;
       }
     }
     .sh_r {
@@ -238,6 +243,17 @@ export default {
     .jin {
       left: 81%;
       bottom: 6.5rem;
+    }
+  }
+  .codes{
+    width: 100%;
+    /*height: 10rem;*/
+    text-align: center;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    img{
+      display: inline-block;
+      width: 50%;
     }
   }
   .instruction {

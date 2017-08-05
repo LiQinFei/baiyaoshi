@@ -1,5 +1,6 @@
 <template>
   <div class="details" v-title data-title="商品详情">
+    <div v-if="boos == true">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide"><img src="./banner_1.jpg" alt=""></div>
@@ -31,14 +32,18 @@
       <img src="./12.jpg" alt="">
       <img src="./13.jpg" alt="">
     </div>
+    </div>
+    <div v-else>
+    <div v-html="datas">
+      {{datas}}
+    </div>
+    </div>
     <div class="pay">
 
         <div class="aui-btn aui-btn-block" @click="bay">立即购买</div>
 
     </div>
   </div>
-
-
 </template>
 <script>
   import Vue from 'vue'
@@ -46,10 +51,21 @@
   export default {
       data(){
         return{
-          users:[]
+          users:[],
+          datas:'',
+          boos:''
         }
-      },
+      },beforeCreate(){
+      toast.loading({
+        title:"加载中",
+        duration:2000
+      });
+  }
+  ,updated(){
+    toast.hide()
+  },
     created(){
+      let that = this
      this.users = JSON.parse(localStorage.getItem("users"));
       Vue.nextTick(function () {
         let mySwiper = new Swiper('.swiper-container', {
@@ -58,7 +74,24 @@
           pagination: '.swiper-pagination',
           autoplay: 3000
         })
+
+        if(that.$route.params.id == 'baiyao'){
+          toast.hide()
+        }
+
+
+
+
+
+
       })
+      console.log(this.$route.params.id)
+      if(this.$route.params.id == 'baiyao'){
+        this.boos =true;
+      }else {
+        this.boos =false;
+        this.getData();
+      }
 
     },methods:{
 
@@ -69,8 +102,33 @@
         }else{
          this.$router.push('/paypage')
        }
-      }
+      },getData(){
+        let that = this
+        this.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=goods_detial",
+          data:{
+            goods_id:this.$route.params.id
+          }
+        }).then(function (res) {
+          // that.nums = res.data
+          // console.log(that.nums)
 
+          let zhuan = res.data.goods_content
+//          console.log(that.datas)
+
+
+
+          function unescape(str) {
+            var elem = document.createElement('div')
+            elem.innerHTML = str
+            return elem.innerText || elem.textContent
+          }
+           that.datas = unescape(zhuan)
+        }).catch(function (err) {
+          console.log('网络错误')
+        })
+      }
     }
   }
 </script>

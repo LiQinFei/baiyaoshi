@@ -9,10 +9,11 @@
           <i class="iconfont icon-daohang"></i>
         </div>
       </div>
+      <!--/home/homepage/homepageSort/-->
       <div  class="menu_r">
         <transition name="fade">
           <ul v-if="show">
-            <li v-for="item in datas"><router-link to="/home/homepage/homepageSort">{{item.mobile_name}}</router-link></li>
+            <li v-for="item in datasList"><router-link v-bind='{to:"/home/homepage/homepageSort/"+item.id}'>{{item.mobile_name}}</router-link></li>
           </ul>
         </transition>
       </div>
@@ -32,21 +33,21 @@
     <!--轮播图-->
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <router-link to="/details">
-            <img src="./banner@2x.jpg" alt="">
+        <div class="swiper-slide" v-for="item in dataswiper">
+          <router-link v-bind='{to:"/details/"+item.goods_id}'>
+            <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
           </router-link>
         </div>
-        <div class="swiper-slide">
-          <router-link to="/details">
-            <img src="./banner@2x.jpg" alt="">
-          </router-link>
-        </div>
-        <div class="swiper-slide">
-          <router-link to="/details">
-            <img src="./banner@2x.jpg" alt="">
-          </router-link>
-        </div>
+        <!-- <div class="swiper-slide">
+           <router-link to="/details">
+             <img src="./banner@2x.jpg" alt="">
+           </router-link>
+         </div>
+         <div class="swiper-slide">
+           <router-link to="/details">
+             <img src="./banner@2x.jpg" alt="">
+           </router-link>
+         </div>-->
       </div>
       <!-- 如果需要分页器 -->
       <div class="swiper-pagination"></div>
@@ -54,57 +55,59 @@
     <!--内容-->
     <div class="home_c">
       <!--热门产品 start-->
+      <!--datasHot-->
       <div class="hot">
         <h2><i></i><span>热门产品</span></h2>
-        <div class="hot_t">
-          <router-link to="/details">
-          <img src="./yz.jpg" alt="">
-          <div class="text">
-            <div>
-              <span>简约咖啡厅靠背椅</span>
-              <span>￥199</span>
-            </div>
-          </div>
-          </router-link>
-        </div>
+        <!--<div class="hot_t">-->
+        <!--<router-link to="/details">-->
+        <!--<img src="./yz.jpg" alt="">-->
+        <!--<div class="text">-->
+        <!--<div>-->
+        <!--<span>简约咖啡厅靠背椅</span>-->
+        <!--<span>￥199</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</router-link>-->
+        <!--</div>-->
         <div class="hot_b">
-          <div>
-            <router-link to="/details">
-            <img src="./kby.jpg" alt="">
-            <div>
-              <span>简约咖啡厅靠背椅</span>
-              <span>￥199</span>
-            </div>
-            </router-link>
-          </div>
-          <div>
-            <router-link to="/details">
-              <img src="./td.jpg" alt="">
+          <div v-for="item in datasHot">
+            <router-link v-bind='{to:"/details/"+item.goods_id }'>
+              <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
               <div>
-                <span>简约咖啡厅靠背椅</span>
-                <span>￥199</span>
+
+                <span>{{item.goods_name}}</span>
+                <span>￥{{item.shop_price}}</span>
               </div>
             </router-link>
           </div>
+          <!--<div>-->
+          <!--<router-link to="/details">-->
+          <!--<img src="./td.jpg" alt="">-->
+          <!--<div>-->
+          <!--<span>简约咖啡厅靠背椅</span>-->
+          <!--<span>￥199</span>-->
+          <!--</div>-->
+          <!--</router-link>-->
+          <!--</div>-->
 
-          <div>
-            <router-link to="/details">
-            <img src="./td.jpg" alt="">
-            <div>
-              <span>简约咖啡厅靠背椅</span>
-              <span>￥199</span>
-            </div>
-            </router-link>
-          </div>
-          <div>
-            <router-link to="/details">
-            <img src="./td.jpg" alt="">
-            <div>
-              <span>简约咖啡厅靠背椅简背椅简约椅简约约咖啡</span>
-              <span>￥199</span>
-            </div>
-            </router-link>
-          </div>
+          <!--<div>-->
+          <!--<router-link to="/details">-->
+          <!--<img src="./td.jpg" alt="">-->
+          <!--<div>-->
+          <!--<span>简约咖啡厅靠背椅</span>-->
+          <!--<span>￥199</span>-->
+          <!--</div>-->
+          <!--</router-link>-->
+          <!--</div>-->
+          <!--<div>-->
+          <!--<router-link to="/details">-->
+          <!--<img src="./td.jpg" alt="">-->
+          <!--<div>-->
+          <!--<span>简约咖啡厅靠背椅简背椅简约椅简约约咖啡</span>-->
+          <!--<span>￥199</span>-->
+          <!--</div>-->
+          <!--</router-link>-->
+          <!--</div>-->
         </div>
       </div>
       <!--热门产品 end-->
@@ -113,19 +116,19 @@
       <div class="all">
         <h2><i></i><span>全部产品</span></h2>
         <ul class="list">
-          <li>
-            <router-link to="/details">
-            <div class="listL">
-              <img src="./sf.jpg" alt="">
-            </div>
-            <div class="listR">
-              <p>四轴飞行遥控飞机耐摔无人机高清航拍飞行器</p>
-              <div class="listRB">
-                <p class="num">库存:172</p>
-                <p class="money">￥5500</p>
-                <div class="icon"><i class="iconfont icon-gouwuche"></i></div>
+          <li v-for="item in datasall">
+            <router-link v-bind='{to:"/details/"+item.goods_id }'>
+              <div class="listL">
+                <img  v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
               </div>
-            </div>
+              <div class="listR">
+                <p>{{item.goods_name}}</p>
+                <div class="listRB">
+                  <p class="num">库存:{{item.store_count}}</p>
+                  <p class="money">￥{{item.shop_price}}</p>
+                  <div class="icon"><i class="iconfont icon-gouwuche"></i></div>
+                </div>
+              </div>
             </router-link>
           </li>
         </ul>
@@ -138,11 +141,21 @@
   export default {
     data(){
       return{
-
         show: false,
         showl: false,
-        datas:[]
+        datasList:[],
+        dataswiper:[],
+        datasHot:[],
+        datasall:[]
       }
+    },beforeCreate(){
+      toast.loading({
+        title:"加载中",
+        duration:2000
+      });
+    }
+    ,updated(){
+      toast.hide()
     },
     created(){
       let that = this
@@ -160,10 +173,11 @@
           // that.nums = res.data
           // console.log(that.nums)
 
-          that.datas = res.data
-          console.log(that.datas)
-
-
+          that.datasList = res.data[0]
+          that.dataswiper = res.data[1][0]
+          that.datasHot = res.data[1][1]
+          that.datasall = res.data[1][2]
+          console.log(that.datasall)
 
         }).catch(function (err) {
           console.log('网络错误')
@@ -380,18 +394,17 @@
             position: relative;
             img{
               width: 100%;
-              padding: 0.3rem 0.2rem;
+              padding: 0.2rem 0.2rem;
             }
-
             div{
-              position: absolute;
-              bottom: 0.3rem;
-              left: 0;
+              /*position: absolute;*/
+              /*bottom: 0.3rem;*/
+              /*left: 0;*/
               width: 100%;
               padding: 0.2rem;
               display: flex;
-              background: rgba(255,255,255,0.4);
-              height: 2rem;
+              /*background: rgba(0,0,0,0.1);*/
+              /*height: 2rem;*/
               span{
                 font-size: 0.6rem;
                 height: 1.6rem;
@@ -409,6 +422,7 @@
                   color: #FF6801;
                   font-size: 0.8rem;
                   text-align: center;
+                  padding-right: 0.3rem;
                 }
               }
             }
@@ -439,22 +453,27 @@
             margin-bottom: 0.5rem;
             box-shadow: 0 0 5px 3px #ccc;
             width: 100%;
-           a{
-             width: 100%;
-             display: flex;
-           }
+            a{
+              width: 100%;
+              display: flex;
+            }
             .listL {
               flex: 0 0 5rem;
               img {
                 width: 100%;
+                border-radius: 5px 0 0 5px;
               }
             }
             .listR {
               flex: 1;
               padding: 0.4rem;
               & > p {
-                height: 2.5rem;
                 font-size: 0.7rem;
+                overflow : hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
               }
 
               .listRB {

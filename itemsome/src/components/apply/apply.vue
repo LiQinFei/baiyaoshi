@@ -184,9 +184,8 @@
                 duration:2000
               });
               /*let obj = JSON.stringify({"is_distribut": res.data.result.is_distribut });*/
-              localStorage.setItem('is_distribut',2);
+              localStorage.setItem('is_distribut',3);
               that.$router.push('/home/lding')
-
             } else {
               toast.fail({
                 title:res.data.msg,

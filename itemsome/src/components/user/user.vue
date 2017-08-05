@@ -8,6 +8,7 @@
         <div class="sh_r">
           <p class="name">{{datas.nickname}}</p>
           <p class="num">账号：{{datas.mobile}}</p>
+          <p class="num">推广人:{{datas.user_ang}}</p>
           <i class="aui-iconfont aui-icon-right"></i>
         </div>
       </div>
@@ -75,12 +76,9 @@
           <div>
             <i class="iconfont icon-msnui-market"></i>
           </div>
-          <div>
-            <router-link to="/home/spread">
+          <div @click="isDistribut()">
               推广员系统
-
               <i class="aui-iconfont aui-icon-right"></i>
-            </router-link>
           </div>
         </li>
         <li>
@@ -119,7 +117,7 @@
 
                 </div>
               </li> -->
-        <li>
+      <!--  <li>
           <div>
             <i class="iconfont icon-baoxian"></i>
           </div>
@@ -127,7 +125,7 @@
             保险办理
             <i class="aui-iconfont aui-icon-right"></i>
           </div>
-        </li>
+        </li>-->
         <li>
           <div>
             <i class="iconfont icon-gongyi"></i>
@@ -153,12 +151,14 @@ export default {
   data(){
     return{
       users:[],
-      datas:[]
+      datas:[],
+      isd:''
     }
   },
+
   created() {
     this.users = JSON.parse(localStorage.getItem("users"));
-
+    this.isd = localStorage.getItem("is_distribut")
     let that = this;
     Vue.nextTick(function () {
       that.$http({
@@ -194,7 +194,19 @@ export default {
     exits() {
       localStorage.clear();
       this.$router.push('/login')
+    },
+    isDistribut(){
+      if(this.isd == 1){
+        this.$router.push('/apply')
+      } else if(this.isd == 3){
+        this.$router.push('/home/spread')
+      }
+      else{
+        this.$router.push('/home/lding')
+      }
     }
+
+
   }
 }
 </script>
@@ -222,7 +234,7 @@ export default {
     }
     .sh_r {
       flex: 1;
-      padding: 0.7rem 0 0 1rem;
+      padding: 0.2rem 0 0 1rem;
       position: relative;
       .name {
         font-size: 0.7rem;

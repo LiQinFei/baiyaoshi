@@ -71,7 +71,7 @@ export default new Router({
                             name: 'homepageC',
                             component: resolve => require(['../components/homepageC/homepageC.vue'], resolve),
                         }, {
-                            path: 'homepageSort',
+                            path: 'homepageSort/:id',
                             name: 'homepageSort',
                             component: resolve => require(['../components/homepageSort/homepageSort.vue'], resolve),
                         }
@@ -177,7 +177,7 @@ export default new Router({
             component: resolve => require(['../components/forgetlogin2/forgetlogin2.vue'], resolve)
         },
         {
-            path: '/details',
+            path: '/details/:id',
             name: 'details',
             /*商品详情*/
             component: resolve => require(['../components/details/details.vue'], resolve)
