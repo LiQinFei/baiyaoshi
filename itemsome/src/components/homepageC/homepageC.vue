@@ -158,15 +158,11 @@
       toast.hide()
     },
     created(){
-      let that = this
-      Vue.nextTick(function () {
-        let mySwiper = new Swiper ('.swiper-container', {
-          direction: 'horizontal',
-          loop: true,
-          pagination: '.swiper-pagination',
-          autoplay : 3000
-        })
-        that.$http({
+      this.getdata()
+    },methods:{
+      getdata:function(){
+        let that = this
+        this.$http({
           method: 'post',
           url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=categoryList"
         }).then(function (res) {
@@ -179,11 +175,19 @@
           that.datasall = res.data[1][2]
           console.log(that.datasall)
 
+          Vue.nextTick(function () {
+            let mySwiper = new Swiper ('.swiper-container', {
+              direction: 'horizontal',
+              loop: true,
+              pagination: '.swiper-pagination',
+              autoplay : 3000
+            })
+          })
+
         }).catch(function (err) {
           console.log('网络错误')
         })
-
-      })
+      }
     }
   }
 </script>

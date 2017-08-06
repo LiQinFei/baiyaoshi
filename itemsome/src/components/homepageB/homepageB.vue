@@ -74,7 +74,6 @@
             <router-link v-bind='{to:"/details/"+item.goods_id }'>
               <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
               <div>
-
                 <span>{{item.goods_name}}</span>
                 <span>￥{{item.shop_price}}</span>
               </div>
@@ -158,15 +157,12 @@
       toast.hide()
     },
     created(){
-      let that = this
-      Vue.nextTick(function () {
-        let mySwiper = new Swiper ('.swiper-container', {
-          direction: 'horizontal',
-          loop: true,
-          pagination: '.swiper-pagination',
-          autoplay : 3000
-        })
-        that.$http({
+      this.getdata()
+
+    },methods:{
+      getdata:function(){
+        let that = this
+        this.$http({
           method: 'post',
           url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=categoryList"
         }).then(function (res) {
@@ -179,11 +175,19 @@
           that.datasall = res.data[1][2]
           console.log(that.datasall)
 
+          Vue.nextTick(function () {
+            let mySwiper = new Swiper ('.swiper-container', {
+              direction: 'horizontal',
+              loop: true,
+              pagination: '.swiper-pagination',
+              autoplay : 3000
+            })
+          })
+
         }).catch(function (err) {
           console.log('网络错误')
         })
-
-      })
+      }
     }
   }
 </script>
