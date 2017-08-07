@@ -65,7 +65,15 @@ export default {
          ],
       datas:[]
     }
-  },
+  },beforeCreate(){
+  toast.loading({
+    title:"加载中",
+    duration:2000
+  });
+}
+,updated(){
+  toast.hide()
+},
   created() {
     this.users = JSON.parse(localStorage.getItem("users"));
     let that = this;

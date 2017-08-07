@@ -188,6 +188,12 @@ export default new Router({
             /*支付*/
             component: resolve => require(['../components/paypage/paypage.vue'], resolve)
         },
+      {
+        path: '/pagea/:id',
+        name: 'pagea',
+        /*支付*/
+        component: resolve => require(['../components/paypage/pagea.vue'], resolve)
+      },
         {
             path: '/gongyi',
             name: 'gongyi',

@@ -1,38 +1,40 @@
 <template>
   <div class="paypage"  v-title data-title="支付">
     <ul class="tops">
-      <li>
-        <div>
-          {{dataadd.consignee}}
-          <div class="aui-label aui-label-info">默认</div>
+      <li  v-for='(item,index) in nums'>
+        <div v-on:click="addClassFun(index)">
+          徐晓霞
+          <div v-if="index == qwerqwre" class="aui-label aui-label-info">默认</div>
         </div>
-        <div>
-          <p>{{dataadd.mobile}}</p>
-          <p>{{dataadd.address}}</p>
+        <div v-on:click="addClassFun(index)">
+          <p>{{item.ipone}}</p>
+          <p>{{item.add}}</p>
         </div>
         <div>
           <router-link to="/address">
             <i class="aui-iconfont aui-icon-pencil"></i>
           </router-link>
-
         </div>
       </li>
     </ul>
-
     <!--详情-->
     <div class="details">
       <div>
-        <img :src="datagoods.original_img" alt="">
+        <img src="./1.png" alt="">
       </div>
       <div>
-          <h4>{{datagoods.goods_name}}</h4>
-          <p>{{datagoods.keywords}}</p>
-          <p class="pri">￥ {{datagoods.shop_price}}</p>
+          <h4>百耀 移动WiFi</h4>
+          <p>白色</p>
+          <p class="pri">￥ 1680.00</p>
           <span>*1</span>
       </div>
     </div>
     <div class="list">
       <ul>
+        <li>
+          <div>商品总额</div>
+          <div>￥1680</div>
+        </li>
         <li>
           <div>购买数量</div>
           <div>1</div>
@@ -55,14 +57,14 @@
         </li>
         <li>
           <div>应付总额</div>
-          <div>￥{{datagoods.shop_price}}</div>
+          <div>￥1680</div>
         </li>
       </ul>
     </div>
 
     <div class="foots">
       <ul>
-        <li> 应付：￥{{datagoods.shop_price}}</li>
+        <li> 应付：￥1680</li>
         <li><div class="aui-btn aui-btn-danger aui-btn-block" @click="payfor">去支付</div></li>
       </ul>
     </div>
@@ -74,46 +76,20 @@
     data(){
         return{
           users:[],
-         /* nums:[
+          nums:[
             {ipone:'15888555555',add:'广东省深圳市南山区洱海大道冰海大道87号55'}
-          ],*/
+          ],
           qwerqwre:"0",
-          datagoods:[],
-          dataadd:[]
-
+          datas:[]
         }
-    },beforeCreate(){
-    toast.loading({
-      title:"加载中",
-      duration:2000
-    });
-  }
-  ,updated(){
-    toast.hide()
-  },
+
+
+
+
+    },
     created() {
     this.users = JSON.parse(localStorage.getItem("users"));
-    console.log(this.$route.params.id)
     let that = this;
-
-      if(this.$route.params.id == 'baiyao'){
-
-      }else {
-        that.$http({
-               method: 'post',
-               url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=detail",
-               data: {
-                 user_id: that.users.user_id,
-                 goods_id: that.$route.params.id
-               }
-             }).then(function (res) {
-               that.datagoods = res.data.goods
-               that.dataadd = res.data.address
-            console.log(that.datagoods)
-              //console.log(res)
-             })
-      }
-
     // Vue.nextTick(function () {
     //   that.$http({
     //     method: 'post',
@@ -154,6 +130,7 @@
           url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
           data: {
             user_id: that.users.user_id
+
           }
         }).then(function (res) {
           // that.nums = res.data

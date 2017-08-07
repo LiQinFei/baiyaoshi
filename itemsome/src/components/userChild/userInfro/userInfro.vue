@@ -82,7 +82,7 @@ export default {
           };
         } else {
           toast.fail({
-            title:"图片必须小于500k",
+            title:"图片必须小于1500k",
             duration:1000
           });
         }

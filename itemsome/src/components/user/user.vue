@@ -151,7 +151,7 @@
 </template>
 
 <script>
-  import Vue from 'vue'
+import Vue from 'vue'
 export default {
   data(){
     return{
@@ -159,7 +159,15 @@ export default {
       datas:[],
       isd:''
     }
-  },
+  },beforeCreate(){
+  toast.loading({
+    title:"加载中",
+    duration:2000
+  });
+}
+,updated(){
+  toast.hide()
+},
 
   created() {
     this.users = JSON.parse(localStorage.getItem("users"));
@@ -177,12 +185,6 @@ export default {
         // console.log(that.nums)
         that.datas = res.data
         console.log(that.datas)
-
-
-
-
-
-
       }).catch(function (err) {
         console.log('网络错误')
       })

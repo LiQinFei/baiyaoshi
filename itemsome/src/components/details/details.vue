@@ -103,7 +103,12 @@
           this.$router.push('/login')
         }else{
          //this.$router.push('/paypage')
-           this.$router.push({ name: 'paypage', params: { id: this.id }})
+           if(this.$route.params.id == 'baiyao'){
+             this.$router.push({ name: 'pagea', params: { id: this.id }})
+           }else {
+             this.$router.push({ name: 'paypage', params: { id: this.id }})
+           }
+
        }
       },getData(){
         let that = this

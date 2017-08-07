@@ -8,14 +8,11 @@
 export default {
   name: 'app',
   created(){
-
       Vue.directive('title', {
         inserted: function (el, binding) {
           document.title = el.dataset.title
         }
       })
-
-
   }
 
 }

@@ -138,7 +138,6 @@
         imgtwo : '',
         imgthree : '',
         imgfour : '',
-
         phone:'',
         name:'',
         sex:'',
@@ -184,7 +183,7 @@
                 duration:2000
               });
               /*let obj = JSON.stringify({"is_distribut": res.data.result.is_distribut });*/
-              localStorage.setItem('is_distribut',3);
+              localStorage.setItem('is_distribut',4);
               that.$router.push('/home/lding')
             } else {
               toast.fail({
