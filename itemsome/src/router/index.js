@@ -11,7 +11,7 @@ import Router from 'vue-router'
 
 
 
-//import gongyi from '../components/publis_spirited/code.vue' /*gongyi*/
+//import gongyi from '../components/publis_spirited/codepay.vue' /*gongyi*/
 
 
 
@@ -204,6 +204,11 @@ export default new Router({
         name: 'code',
         /*code*/
         component: resolve => require(['../components/code/code.vue'], resolve)
+      },{
+        path: '/codepay',
+        name: 'codepay',
+        /*code*/
+        component: resolve => require(['../components/codepay/codepay.vue'], resolve)
       },
         {
             path: '/orderAll',

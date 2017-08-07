@@ -4,7 +4,6 @@
       <li>
         <div>
           {{dataadd.consignee}}
-          <div class="aui-label aui-label-info">默认</div>
         </div>
         <div>
           <p>{{dataadd.mobile}}</p>
@@ -63,7 +62,7 @@
     <div class="foots">
       <ul>
         <li> 应付：￥{{datagoods.shop_price}}</li>
-        <li><div class="aui-btn aui-btn-danger aui-btn-block" @click="payfor">去支付</div></li>
+        <li><div class="aui-btn aui-btn-danger aui-btn-block" @click="payfor">确认支付</div></li>
       </ul>
     </div>
   </div>
@@ -96,9 +95,7 @@
     console.log(this.$route.params.id)
     let that = this;
 
-      if(this.$route.params.id == 'baiyao'){
 
-      }else {
         that.$http({
                method: 'post',
                url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=detail",
@@ -112,7 +109,7 @@
             console.log(that.datagoods)
               //console.log(res)
              })
-      }
+
 
     // Vue.nextTick(function () {
     //   that.$http({
@@ -131,6 +128,7 @@
     // })
 
   }, beforeRouteEnter(to, from, next) {
+
     let oo = JSON.parse(localStorage.getItem("users"));
     if (oo == null) {
       next({ path: '/login' })
@@ -144,33 +142,50 @@
         this.qwerqwre = index;
       }
     ,payfor:function(){
-          let that = this
-        toast.loading({
-          title:"正在加载",
-          duration:1000
-        });
-        this.$http({
-          method: 'post',
-          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
-          data: {
-            user_id: that.users.user_id
-          }
-        }).then(function (res) {
-          // that.nums = res.data
-          toast.hide();
-          // console.log(that.nums)
-        if(res.data.status == 1){
+        let that = this
+        if(this.dataadd == null){
+          dialog.alert({
+            title:"提示",
+            msg:'请点击右上角增加收货地址',
+            buttons:['确定']
 
-          window.location = 'https://one.teegon.com/buy/createorder?id=05a08df24b1ce9dc726ad6a14a87098e'
+          },function(ret){
+          })
+        }else {
+          toast.loading({
+            title:"正在加载",
+            duration:1000
+          });
+          this.$http({
+            method: 'post',
+            url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
+            data: {
+              user_id: that.users.user_id,
+              goods_id: that.$route.params.id,
+              type:2
+            }
+          }).then(function (res) {
+            // that.nums = res.data
+            toast.hide();
+            // console.log(that.nums)
 
+            if(res.data.status == 1){
+              toast.success({
+                title:'已购买成功',
+                duration:2000
+              });
+              that.$router.push('/orderAll/orderAlls')
+            }
+
+          }).catch(function (err) {
+            console.log('网络错误')
+          })
         }
 
 
 
 
-        }).catch(function (err) {
-          console.log('网络错误')
-        })
+
 
 
        }

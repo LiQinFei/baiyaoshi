@@ -2,7 +2,7 @@
   <div class="spread" v-title data-title="推广员">
     <div class="spread_head">
       <div class="sh_l">
-        <img  v-bind:src="datas.head_pic" alt="">
+        <img v-bind:src="datas.head_pic" alt="">
       </div>
       <div class="sh_r">
         <div class="erwei" @click="imgs()"><img :src="datas.user_qrcode" alt=""></div>
@@ -13,7 +13,6 @@
         <span>推广人数：{{datas.underling_number}}人</span>
         <p class="num">推广人:{{datas.user_ang}}</p>
       </div>
-
     </div>
 
     <div class="rank">

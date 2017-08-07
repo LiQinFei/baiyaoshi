@@ -1,14 +1,13 @@
 <template>
   <div class="paypage"  v-title data-title="支付">
     <ul class="tops">
-      <li  v-for='(item,index) in nums'>
-        <div v-on:click="addClassFun(index)">
-          徐晓霞
-          <div v-if="index == qwerqwre" class="aui-label aui-label-info">默认</div>
+      <li>
+        <div>
+          {{dataadd.consignee}}
         </div>
-        <div v-on:click="addClassFun(index)">
-          <p>{{item.ipone}}</p>
-          <p>{{item.add}}</p>
+        <div>
+          <p>{{dataadd.mobile}}</p>
+          <p>{{dataadd.address}}</p>
         </div>
         <div>
           <router-link to="/address">
@@ -24,17 +23,13 @@
       </div>
       <div>
           <h4>百耀 移动WiFi</h4>
-          <p>白色</p>
           <p class="pri">￥ 1680.00</p>
           <span>*1</span>
       </div>
     </div>
     <div class="list">
       <ul>
-        <li>
-          <div>商品总额</div>
-          <div>￥1680</div>
-        </li>
+
         <li>
           <div>购买数量</div>
           <div>1</div>
@@ -80,16 +75,38 @@
             {ipone:'15888555555',add:'广东省深圳市南山区洱海大道冰海大道87号55'}
           ],
           qwerqwre:"0",
-          datas:[]
+          datas:[],
+          datagoods:[],
+          dataadd:[]
         }
+    },beforeCreate(){
+    toast.loading({
+      title:"加载中",
+      duration:2000
+    });
+  },computed:{
 
-
-
-
-    },
+    }
+  ,updated(){
+    toast.hide()
+  },
     created() {
     this.users = JSON.parse(localStorage.getItem("users"));
     let that = this;
+        that.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=shop_a",
+          data: {
+            user_id: that.users.user_id,
+            goods_id: that.$route.params.id
+          }
+        }).then(function (res) {
+          that.datagoods = res.data.goods
+          that.dataadd = res.data.address
+          console.log(that.dataadd )
+          //console.log(res)
+        })
+
     // Vue.nextTick(function () {
     //   that.$http({
     //     method: 'post',
@@ -120,34 +137,18 @@
         this.qwerqwre = index;
       }
     ,payfor:function(){
-          let that = this
-        toast.loading({
-          title:"正在加载",
-          duration:1000
-        });
-        this.$http({
-          method: 'post',
-          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
-          data: {
-            user_id: that.users.user_id
+      if(this.dataadd == null){
+        dialog.alert({
+          title:"提示",
+          msg:'请点击右上角增加收货地址',
+          buttons:['确定']
 
-          }
-        }).then(function (res) {
-          // that.nums = res.data
-          toast.hide();
-          // console.log(that.nums)
-        if(res.data.status == 1){
-
-          window.location = 'https://one.teegon.com/buy/createorder?id=05a08df24b1ce9dc726ad6a14a87098e'
-
-        }
-
-
-
-
-        }).catch(function (err) {
-          console.log('网络错误')
+        },function(ret){
         })
+      }else {
+        this.$router.push('/codepay')
+      }
+
 
 
        }

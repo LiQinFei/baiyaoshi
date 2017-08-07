@@ -231,7 +231,7 @@ export default {
           that.$router.push('/address');
         }else {
           toast.fail({
-            title:res.data.msg,
+            title:'信息填写有误',
             duration:2000
           });
         }

@@ -4,10 +4,8 @@
     <div class="swiper-text">
       <div class="swiper-wrapper">
         <div class="swiper-slide stop-swiping">
-          <p>用户尾号<span>159***0003</span>已为公益机构捐赠  30元</p>
-        </div>
-        <div class="swiper-slide stop-swiping">
-          <p>用户尾号<span>159***0003</span>已为公益机构捐赠  30元</p>
+      <!--    <p>用户尾号<span>159***0003</span>已为公益机构捐赠  30元</p>-->
+          <p>目前公益奖池以为公益机构捐赠{{datas}}元</p>
         </div>
       </div>
     </div>
@@ -16,17 +14,30 @@
 <script>
   import Vue from 'vue'
   export default {
+      data(){
+        return{
+          datas:''
+        }
+      },
     created() {
         /*轮播图的字动*/
-
+      let that = this
         Vue.nextTick(function(){
-          let textSwiper = new Swiper('.swiper-text', {
+          /*let textSwiper = new Swiper('.swiper-text', {
             direction : 'vertical',
             loop : true,
             autoplay : 2000,
             noSwipingClass : 'stop-swiping'
-          })
+          })*/
         })
+      that.$http({
+        method: 'post',
+        url: commonUrl + api + "/index.php?m=Mobile&c=user&a=award"
+      }).then(function (res) {
+          that.datas = res.data.num
+        console.log(res )
+        //console.log(res)
+      })
 
     }
   }
