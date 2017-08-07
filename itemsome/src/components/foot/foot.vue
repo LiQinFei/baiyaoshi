@@ -39,11 +39,26 @@
       }
     },
     created(){
+      let that = this
       this.users = JSON.parse(localStorage.getItem("users"));
       this.isd = localStorage.getItem("is_distribut")
-
+      this.$http({
+        method: 'post',
+        url: commonUrl + api + "/index.php?m=Mobile&c=user&a=ang_status",
+        data: {
+          user_id: that.users.user_id,
+        }
+      }).then(function (res) {
+        // that.nums = res.data
+        // console.log(that.nums)
+        that.isd = res.data.is_distribut
+        console.log( res.data.is_distribut)
+        localStorage.setItem('is_distribut',res.data.is_distribut);
+      }).catch(function (err) {
+      })
       Vue.nextTick(function(){
       })
+
     }, computed : {
       isActive : function(){
         if(this.$route.path == '/home/homepage/homepageC' || this.$route.path == '/home/homepage/homepageB' || this.$route.path == '/home/homepage/homepageSort'){
@@ -59,21 +74,31 @@
           return true
         }
       }
-
     },methods:{
       isDistribut(){
+        let that =this
         if(this.users == null){
           this.$router.push('/login')
         }
        else if(this.isd == 1){
+          dialog.alert({
+            title:"提示",
+            msg:'请先在a商城买东西，才能注册哦！',
+            buttons:['确定']
+          },function(ret){
+            if(ret.buttonIndex ==1){
+              that.$router.push('/home/homepage/homepageA')
+            }
+          })
+       } else if(this.isd == 2){
           this.$router.push('/apply')
-       } else if(this.isd == 3){
-           this.$router.push('/home/spread')
        }
+       else if(this.isd == 3){
+          this.$router.push('/home/lding')
+        }
        else{
-         this.$router.push('/home/lding')
+          this.$router.push('/home/spread')
        }
-
       },isUser(){
          if(this.users == null){
           this.$router.push('/login')

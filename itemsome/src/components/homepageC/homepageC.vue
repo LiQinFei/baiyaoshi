@@ -164,7 +164,7 @@
         let that = this
         this.$http({
           method: 'post',
-          url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=categoryList"
+          url: commonUrl + api + "/index.php?m=Mobile&c=goods&a=goodsList_c"
         }).then(function (res) {
           // that.nums = res.data
           // console.log(that.nums)
@@ -173,7 +173,7 @@
           that.dataswiper = res.data[1][0]
           that.datasHot = res.data[1][1]
           that.datasall = res.data[1][2]
-          console.log(that.datasall)
+          console.log(res)
 
           Vue.nextTick(function () {
             let mySwiper = new Swiper ('.swiper-container', {

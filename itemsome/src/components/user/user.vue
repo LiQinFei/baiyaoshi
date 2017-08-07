@@ -13,7 +13,12 @@
         </div>
       </div>
     </router-link>
+    <div class="share">
+      <span>剩余点券:{{datas.share_car}}</span>
+      <span>剩余兑换豆:{{datas.share_bean}}</span>
+    </div>
     <div class="order">
+
       <div class="order_t">
 
         <div>
@@ -25,8 +30,8 @@
             <i class="aui-iconfont aui-icon-right"></i>
           </router-link>
         </div>
-
       </div>
+
       <div class="order_con">
         <ul>
           <li>
@@ -220,10 +225,11 @@ export default {
   overflow: auto;
   .user_head {
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     background: #F6B652;
     display: flex;
     padding: 15px 0.5rem;
+    padding-bottom:0;
     .sh_l {
       flex: 0 0 3.5rem;
       img {
@@ -254,6 +260,25 @@ export default {
     }
   }
 
+  /*分享*/
+  .share{
+    width:100%;
+    height:2rem;
+    line-height:2rem;
+    padding-left:0.5rem;
+    background:#ffffff;
+    border-bottom: 1px solid #eeeeee;
+    background: #F6B652;
+    span{
+      display:inline-block;
+      color: #FFFFFB;
+      font-size:0.7rem;
+      &:last-child{
+        margin-left:1rem;
+      }
+
+    }
+  }
   /*全部订单*/
   .order {
     background: #ffffff;

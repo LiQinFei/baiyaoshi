@@ -13,7 +13,9 @@
         <span>推广人数：{{datas.underling_number}}人</span>
         <p class="num">推广人:{{datas.user_ang}}</p>
       </div>
+
     </div>
+
     <div class="rank">
       <div class="title">
         <div>
@@ -138,6 +140,8 @@ export default {
     background: #F6B652;
     display: flex;
     padding: 15px 0.5rem;
+
+
     .sh_l {
       flex: 0 0 3.5rem;
       img {
@@ -180,7 +184,9 @@ export default {
         color: #FFFFFB;
       }
     }
+
   }
+
   .rank {
     width: 100%;
     height: 12rem;
