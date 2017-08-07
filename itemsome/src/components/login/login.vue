@@ -79,8 +79,9 @@ export default {
           toast.hide()
           if (res.data.status == 1) {
             let obj = JSON.stringify({ "user_id": res.data.result.user_id, "is_distribut": res.data.result.is_distribut });
-            localStorage.setItem("is_distribut", res.data.result.is_distribut)
             localStorage.setItem("users", obj);
+            localStorage.setItem("is_distribut", res.data.result.is_distribut)
+
             toast.success({
               title:res.data.msg,
               duration:2000

@@ -16,7 +16,6 @@
           </router-link>
         </div>
       </li> -->
-
       <li v-for='(item,index) in nums'>
         <div class="aTop">
           <div>{{item.consignee}}</div>
@@ -38,7 +37,6 @@
           </div>
         </div>
       </li>
-
     </ul>
     <div class="foots">
       <router-link to="/editAddress">

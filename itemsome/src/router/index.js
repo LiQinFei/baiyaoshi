@@ -183,7 +183,7 @@ export default new Router({
             component: resolve => require(['../components/details/details.vue'], resolve)
         },
         {
-            path: '/paypage',
+            path: '/paypage/:id',
             name: 'paypage',
             /*支付*/
             component: resolve => require(['../components/paypage/paypage.vue'], resolve)

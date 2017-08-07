@@ -53,7 +53,8 @@
         return{
           users:[],
           datas:'',
-          boos:''
+          boos:'',
+          id:''
         }
       },beforeCreate(){
       toast.loading({
@@ -66,6 +67,7 @@
   },
     created(){
       let that = this
+      this.id = that.$route.params.id
      this.users = JSON.parse(localStorage.getItem("users"));
       Vue.nextTick(function () {
         let mySwiper = new Swiper('.swiper-container', {
@@ -100,7 +102,8 @@
          if(this.users == null){
           this.$router.push('/login')
         }else{
-         this.$router.push('/paypage')
+         //this.$router.push('/paypage')
+           this.$router.push({ name: 'paypage', params: { id: this.id }})
        }
       },getData(){
         let that = this
