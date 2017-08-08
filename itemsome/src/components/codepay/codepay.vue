@@ -35,7 +35,7 @@
     }
     img{
       position:absolute;
-      width:80%;
+      width:60%;
       top:45%;
       left:50%;
       transform:translate(-50%,-50%);

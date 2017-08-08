@@ -209,7 +209,7 @@
           let imgSize = file.size;
 
 
-          if(imgSize < 1024 * 1024 *1.5){
+          if(imgSize < 1024 * 1024 *2.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -219,7 +219,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于1500k",
+              title:"图片必须小于2500k",
               duration:1000
             });
           }
@@ -228,7 +228,7 @@
           let file = document.getElementById('twos').files[0];
           let imgSize = file.size;
 
-          if(imgSize < 1024 * 1024 *1.5){
+          if(imgSize < 1024 * 1024 *2.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -238,7 +238,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于1500k",
+              title:"图片必须小于2500k",
               duration:1000
             });
           }
@@ -247,7 +247,7 @@
         $("#threes").change(function(){
           let file = document.getElementById('threes').files[0];
           let imgSize = file.size;
-          if(imgSize < 1024 * 1024 *1.5){
+          if(imgSize < 1024 * 1024 *2.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -257,7 +257,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于1500k",
+              title:"图片必须小于2500k",
               duration:1000
             });
           }
@@ -266,7 +266,7 @@
         $("#fours").change(function(){
           let file = document.getElementById('fours').files[0];
           let imgSize = file.size;
-          if(imgSize < 1024 * 1024 *1.5){
+          if(imgSize < 1024 * 1024 *2.5){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -276,7 +276,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于1500k",
+              title:"图片必须小于2500k",
               duration:1000
             });
           }

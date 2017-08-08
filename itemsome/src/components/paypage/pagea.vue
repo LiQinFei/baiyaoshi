@@ -137,6 +137,7 @@
         this.qwerqwre = index;
       }
     ,payfor:function(){
+          let that = this
       if(this.dataadd == null){
         dialog.alert({
           title:"提示",
@@ -146,7 +147,35 @@
         },function(ret){
         })
       }else {
-        this.$router.push('/codepay')
+        toast.loading({
+          title:"正在加载",
+          duration:1000
+        });
+        this.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
+          data: {
+            user_id: that.users.user_id,
+            goods_id: that.$route.params.id,
+            type:1
+          }
+        }).then(function (res) {
+          // that.nums = res.data
+          toast.hide();
+          console.log(res)
+          // console.log(that.nums)
+
+          if(res.data.status == 1){
+           /* toast.success({
+              title:'已购买成功',
+              duration:2000
+            });*/
+            that.$router.push('/codepay')
+          }
+
+        })
+
+
       }
 
 

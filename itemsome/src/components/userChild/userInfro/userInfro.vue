@@ -71,7 +71,7 @@ export default {
       $("#files").change(function (){
         let file = document.getElementById('files').files[0];
         let imgSize = file.size;
-        if(imgSize < 1024 * 1024 / 2){
+        if(imgSize < 1024 * 1024 *1.5){
           let reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = function(event){
