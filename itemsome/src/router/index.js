@@ -214,6 +214,11 @@ export default new Router({
         name: 'help',
         /*code*/
         component: resolve => require(['../components/help/help.vue'], resolve)
+      },{
+        path: '/goodcar',
+        name: 'goodcar',
+        /*code*/
+        component: resolve => require(['../components/goodcar/goodcar.vue'], resolve)
       },
         {
             path: '/orderAll',

@@ -1,0 +1,189 @@
+<template>
+  <div class="orderAlls" v-title data-title="购物车">
+    <div>
+      <div v-for="item in datas" class="waitPay">
+        <div class="tops">
+          <div>订单编号：{{item.order_sn}}</div>
+          <div>取消订单</div>
+        </div>
+        <div v-for="list in item.goods_list" class="cont">
+          <div>
+            <img :src="list.goods_img" alt="">
+          </div>
+          <div>
+            <p> {{list.goods_name}}</p>
+            <span>{{list.spec_key_name}}</span>
+            <ul>
+              <!-- <li>黑色</li>  -->
+              <li>*{{list.goods_num}}</li>
+              <li>待付款</li>
+            </ul>
+          </div>
+        </div>
+        <div class="foots">
+          <div>应付：￥{{item.order_amount}}</div>
+          <div>
+            <router-link to="/paypage">
+              <div class="aui-btn aui-btn-danger">付款</div>
+            </router-link>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</template>
+<script>
+  import Vue from 'vue'
+  export default {
+    data() {
+      return {
+        users: [],
+        datas: []
+      }
+    },
+    created() {
+      this.users = JSON.parse(localStorage.getItem("users"));
+      let that = this;
+      Vue.nextTick(function () {
+        that.$http({
+          method: 'post',
+          url: commonUrl + api + "/index.php?m=mobile&c=User&a=goods_list",
+          data: {
+            user_id: that.users.user_id
+          }
+        }).then(function (res) {
+
+
+          that.datas = res.data
+          console.log(that.datas)
+
+        }).catch(function (err) {
+          console.log('网络错误')
+        })
+      })
+    }, beforeRouteEnter(to, from, next) {
+      let oo = JSON.parse(localStorage.getItem("users"));
+      if (oo == null) {
+        next({ path: '/login' })
+      }
+      else {
+        next()
+      }
+    },
+    methods: {
+      removes: function (index) {
+        let dom = $('.finish');
+        /*  $(e.target).parents('.finish').remove()*/
+        dom.eq(index).hide(500);
+      }
+    },beforeCreate(){
+      toast.loading({
+        title:"加载中",
+        duration:2000
+      });
+    }
+    ,updated(){
+      toast.hide()
+    }
+  }
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+  .orderAlls {
+    background: #E5E5E5;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /*等待付款*/
+    .waitPay {
+      background: #ffffff;
+      font-size: 0.6rem;
+      margin: 0.5rem 0;
+      &:first-child{
+        margin-top: 0;
+      }
+      .tops {
+        display: flex;
+        &>div {
+
+          &:first-child {
+            flex: 1;
+            padding-left: 0.5rem;
+          }
+          &:last-child {
+            flex: 0 0 4rem;
+            padding-right: 0.5rem;
+            text-align: right;
+          }
+        }
+        height: 2rem;
+        line-height: 2rem;
+      }
+      .cont {
+        width: 100%;
+        display: flex;
+
+        border-top: 1px solid #D3D3D3;
+        &>div {
+          &:first-child {
+            flex: 0 0 5rem;
+          }
+          &:last-child {
+            flex: 1;
+            p {
+              padding: 0 0.3rem 0 1rem;
+              margin-top: 0.8rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+            span {
+              font-size: 0.6rem;
+              padding-left: 1rem;
+              white-space: nowrap;
+            }
+            ul {
+              width: 100%;
+              display: flex;
+              padding: 0 0.3rem 0 1rem;
+              li {
+                flex: 1;
+                &:nth-child(1) {
+                  text-align: left;
+                }
+                &:nth-child(2) {
+                  text-align: right;
+                  padding-right: 0.5rem;
+                  color: #FEADAD;
+                }
+              }
+            }
+          }
+        }
+      }
+      .foots {
+        border-top: 1px solid #D3D3D3;
+        display: flex;
+        &>div {
+          &:first-child {
+            flex: 1;
+            padding-left: 0.5rem;
+          }
+          &:last-child {
+            flex: 0 0 4rem;
+            padding-right: 0.5rem;
+            text-align: right;
+          }
+        }
+        height: 2rem;
+        line-height: 2rem;
+      }
+    }
+  }
+</style>

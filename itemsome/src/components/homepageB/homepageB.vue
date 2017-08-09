@@ -130,7 +130,7 @@
                 <div class="listRB">
                   <p class="num">库存:{{item.store_count}}</p>
                   <p class="money">￥{{item.shop_price}}</p>
-                  <div class="icon"><i class="iconfont icon-gouwuche"></i></div>
+                  <div class="icon"  @click.prevent="gowu(item.goods_id)"><i class="iconfont icon-gouwuche"></i></div>
                 </div>
               </div>
             </router-link>
@@ -145,6 +145,7 @@
   export default {
     data(){
       return {
+        users:[],
         show : false,
         showl : false,
         datasList : [],
@@ -163,8 +164,56 @@
     },
     created(){
       this.getdata()
-
+      this.users = JSON.parse(localStorage.getItem("users"))
     }, methods : {
+      gowu(id){
+        let that = this
+        console.log(this.users)
+
+        if(this.users == null){
+          dialog.alert({
+            title : "提示",
+            msg : '请先登录',
+            buttons : ['确定']
+          }, function(ret){
+            if(ret.buttonIndex == 1){
+              that.$router.push({path : '/login'})
+            }
+          })
+        }else {
+          toast.loading({
+            title:"加载中",
+            duration:2000
+          });
+          that.$http({
+            method: 'post',
+            url: commonUrl + api + "/index.php?m=mobile&c=User&a=goods_add",
+            data: {
+              user_id: that.users.user_id,
+              goods_id:id
+            }
+          }).then(function (res) {
+            console.log(res)
+            toast.hide();
+            if(res.data.status == 1){
+              dialog.alert({
+                title:"增加成功",
+                msg:'商品已成功加入购物车',
+                buttons:['再逛逛','去购物车']
+              },function(ret){
+                  if(ret.buttonIndex == 2){
+                    that.$router.push({path : '/goodcar'})
+                  }
+              })
+            }else {
+              toast.fail({
+                title:'加入购物车失败',
+                duration:2000
+              });
+            }
+          })
+        }
+      },
       getdata : function(){
         let that = this
         this.$http({

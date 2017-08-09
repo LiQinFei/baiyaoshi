@@ -75,8 +75,8 @@
               <i class="aui-iconfont aui-icon-right"></i>
             </router-link>
           </div>
-
         </li>
+
         <li>
           <div>
             <i class="iconfont icon-msnui-market"></i>
@@ -86,6 +86,19 @@
               <i class="aui-iconfont aui-icon-right"></i>
           </div>
         </li>
+
+        <li>
+          <div>
+            <i class="aui-iconfont aui-icon-cart"></i>
+          </div>
+          <div>
+            <router-link to="/goodcar">
+              购物车
+              <i class="aui-iconfont aui-icon-right"></i>
+            </router-link>
+          </div>
+        </li>
+
         <li>
           <div>
             <i class="iconfont icon-kefu"></i>
