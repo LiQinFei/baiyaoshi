@@ -95,6 +95,17 @@
             <i class="aui-iconfont aui-icon-right"></i>
           </div>
         </li>
+        <li>
+          <div>
+            <i class="aui-iconfont aui-icon-question"></i>
+          </div>
+          <div>
+            帮助
+            <i class="aui-iconfont aui-icon-right"></i>
+          </div>
+        </li>
+
+
       </ul>
     </div>
     <div class="xinyong">

@@ -32,7 +32,7 @@
               <div class="listRB">
                 <p class="num">库存:172</p>
                 <p class="money">￥1680</p>
-                <div class="icon"><i class="iconfont icon-gouwuche"></i></div>
+                <div class="icon" @click.prevent="gowu()"><i class="iconfont icon-gouwuche"></i></div>
               </div>
             </div>
           </router-link>
@@ -52,6 +52,11 @@
         })
 
     }*/
+    methods:{
+      gowu(){
+            console.log(99)
+        }
+    }
 
 
   }

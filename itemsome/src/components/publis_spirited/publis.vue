@@ -5,7 +5,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide stop-swiping">
       <!--    <p>用户尾号<span>159***0003</span>已为公益机构捐赠  30元</p>-->
-          <p>目前公益奖池以为公益机构捐赠{{datas}}元</p>
+          <p>目前公益奖金池累计金额为{{datas}}元</p>
         </div>
       </div>
     </div>

@@ -41,6 +41,7 @@
     <div class="pay">
 
         <div class="aui-btn aui-btn-block" @click="bay">立即购买</div>
+        <div class="aui-btn aui-btn-block" @click="bay">加入购物车</div>
 
     </div>
   </div>
@@ -192,10 +193,16 @@
       bottom: 0;
       left:0;
       width: 100%;
+      display:flex;
       div{
         background:#FF6801;
         color:#ffffff;
-        width: 100%;
+        flex:1;
+        display:inline-block;
+        &:last-child{
+          background:#FF6801;
+
+        }
       }
     }
   }

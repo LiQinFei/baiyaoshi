@@ -83,7 +83,7 @@
        else if(this.isd == 1){
           dialog.alert({
             title:"提示",
-            msg:'请先在a商城买东西，才能注册哦！',
+            msg:'请先购买A商城产品成为会员',
             buttons:['确定']
           },function(ret){
             if(ret.buttonIndex ==1){

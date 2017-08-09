@@ -209,6 +209,11 @@ export default new Router({
         name: 'codepay',
         /*code*/
         component: resolve => require(['../components/codepay/codepay.vue'], resolve)
+      },{
+        path: '/help',
+        name: 'help',
+        /*code*/
+        component: resolve => require(['../components/help/help.vue'], resolve)
       },
         {
             path: '/orderAll',
