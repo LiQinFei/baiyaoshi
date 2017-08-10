@@ -128,8 +128,6 @@ export default {
         that.one = text1
         that.two = text2
         that.three = text3
-
-
       });
 
       picker.on('picker.change', function (index, selectedIndex) {

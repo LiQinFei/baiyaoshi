@@ -32,7 +32,7 @@
               <div class="listRB">
                 <p class="num">库存:172</p>
                 <p class="money">￥1680</p>
-                <div class="icon"><i class="iconfont icon-gouwuche"></i></div>
+                <div class="icon"><span>购买</span></div>
               </div>
             </div>
           </router-link>
@@ -144,11 +144,10 @@
               .icon {
                 position: absolute;
                 right: 0;
-                top: 0.3rem;
-                width: 1.4rem;
+                top: 0.6rem;
+                width: 3rem;
                 height: 1.4rem;
-                background: #FF6801;
-                border-radius: 50%;
+                color: #FF6801;
                 text-align: center;
                 line-height: 1.4rem;
                 i {

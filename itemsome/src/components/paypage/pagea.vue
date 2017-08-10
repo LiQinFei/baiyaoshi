@@ -102,7 +102,11 @@
           }
         }).then(function (res) {
           that.datagoods = res.data.goods
-          that.dataadd = res.data.address
+          if(res.data.address ==null){
+            that.dataadd = ''
+          }else {
+            that.dataadd = res.data.address
+          }
           console.log(that.dataadd )
           //console.log(res)
         })
@@ -138,7 +142,7 @@
       }
     ,payfor:function(){
           let that = this
-      if(this.dataadd == null){
+      if(this.dataadd == ''){
         dialog.alert({
           title:"提示",
           msg:'请点击右上角增加收货地址',

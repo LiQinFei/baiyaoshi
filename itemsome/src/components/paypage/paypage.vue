@@ -105,8 +105,14 @@
                }
              }).then(function (res) {
                that.datagoods = res.data.goods
-               that.dataadd = res.data.address
-            console.log(that.datagoods)
+                if(res.data.address ==null){
+                  that.dataadd = ''
+                }else {
+                    that.dataadd = res.data.address
+                }
+
+
+
               //console.log(res)
              })
 
@@ -143,7 +149,7 @@
       }
     ,payfor:function(){
         let that = this
-        if(this.dataadd == null){
+        if(this.dataadd == ''){
           dialog.alert({
             title:"提示",
             msg:'请点击右上角增加收货地址',
@@ -168,7 +174,6 @@
             // that.nums = res.data
             toast.hide();
             // console.log(that.nums)
-
             if(res.data.status == 1){
               toast.success({
                 title:'已购买成功',
