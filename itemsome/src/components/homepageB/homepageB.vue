@@ -130,7 +130,7 @@
                 <div class="listRB">
                   <p class="num">库存:{{item.store_count}}</p>
                   <p class="money">￥{{item.shop_price}}</p>
-                  <div class="icon"  @click.prevent="gowu(item.goods_id)"><i class="iconfont icon-gouwuche"></i></div>
+                  <div class="icon" @click.prevent="gowu(item.goods_id)"><i class="iconfont icon-gouwuche"></i></div>
                 </div>
               </div>
             </router-link>
@@ -145,7 +145,7 @@
   export default {
     data(){
       return {
-        users:[],
+        users : [],
         show : false,
         showl : false,
         datasList : [],
@@ -180,35 +180,35 @@
               that.$router.push({path : '/login'})
             }
           })
-        }else {
+        } else {
           toast.loading({
-            title:"加载中",
-            duration:2000
+            title : "加载中",
+            duration : 2000
           });
           that.$http({
-            method: 'post',
-            url: commonUrl + api + "/index.php?m=mobile&c=User&a=goods_add",
-            data: {
-              user_id: that.users.user_id,
-              goods_id:id
+            method : 'post',
+            url : commonUrl + api + "/index.php?m=mobile&c=User&a=goods_add",
+            data : {
+              user_id : that.users.user_id,
+              goods_id : id
             }
-          }).then(function (res) {
+          }).then(function(res){
             console.log(res)
             toast.hide();
             if(res.data.status == 1){
               dialog.alert({
-                title:"增加成功",
-                msg:'商品已成功加入购物车',
-                buttons:['再逛逛','去购物车']
-              },function(ret){
-                  if(ret.buttonIndex == 2){
-                    that.$router.push({path : '/goodcar'})
-                  }
+                title : "增加成功",
+                msg : '商品已成功加入购物车',
+                buttons : ['再逛逛', '去购物车']
+              }, function(ret){
+                if(ret.buttonIndex == 2){
+                  that.$router.push({path : '/goodcar'})
+                }
               })
-            }else {
+            } else {
               toast.fail({
-                title:'加入购物车失败',
-                duration:2000
+                title : res.data.msg,
+                duration : 2000
               });
             }
           })

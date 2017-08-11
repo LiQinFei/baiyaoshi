@@ -20,7 +20,7 @@
         </router-link>
       </div>
       <div class="aui-bar-tab-item" tapmode>
-        <a @click="isUser"  class="link" v-bind:class="{ actives: userActive }">
+        <a @click="isUser" class="link" v-bind:class="{ actives: userActive }">
           <i class="aui-iconfont iconfont icon-gerenzhongxin"></i>
           <div class="aui-bar-tab-label">我的</div>
         </a>
@@ -33,9 +33,9 @@
   import Vue from 'vue'
   export default {
     data(){
-      return{
-        users:[],
-        isd:''
+      return {
+        users : [],
+        isd : ''
       }
     },
     created(){
@@ -43,18 +43,18 @@
       this.users = JSON.parse(localStorage.getItem("users"));
       this.isd = localStorage.getItem("is_distribut")
       this.$http({
-        method: 'post',
-        url: commonUrl + api + "/index.php?m=Mobile&c=user&a=ang_status",
-        data: {
-          user_id: that.users.user_id,
+        method : 'post',
+        url : commonUrl + api + "/index.php?m=Mobile&c=user&a=ang_status",
+        data : {
+          user_id : that.users.user_id,
         }
-      }).then(function (res) {
+      }).then(function(res){
         // that.nums = res.data
         // console.log(that.nums)
         that.isd = res.data.is_distribut
-        console.log( res.data.is_distribut)
-        localStorage.setItem('is_distribut',res.data.is_distribut);
-      }).catch(function (err) {
+        console.log(res.data.is_distribut)
+        localStorage.setItem('is_distribut', res.data.is_distribut);
+      }).catch(function(err){
       })
       Vue.nextTick(function(){
       })
@@ -66,45 +66,45 @@
         }
       },
       TGActive : function(){
-        if(this.$route.path == '/home/spread'|| this.$route.path == '/home/lding'){
+        if(this.$route.path == '/home/spread' || this.$route.path == '/home/lding'){
           return true
         }
-      },userActive:function(){
-         if(this.$route.path == '/home/user'){
+      }, userActive : function(){
+        if(this.$route.path == '/home/user'){
           return true
         }
       }
-    },methods:{
+    }, methods : {
       isDistribut(){
-        let that =this
+        let that = this
         if(this.users == null){
           this.$router.push('/login')
         }
-       else if(this.isd == 1){
+        else if(this.isd == 1){
           dialog.alert({
-            title:"提示",
-            msg:'请先购买A商城产品成为会员',
-            buttons:['确定']
-          },function(ret){
-            if(ret.buttonIndex ==1){
+            title : "提示",
+            msg : '请先购买A商城产品成为会员',
+            buttons : ['确定']
+          }, function(ret){
+            if(ret.buttonIndex == 1){
               that.$router.push('/home/homepage/homepageA')
             }
           })
-       } else if(this.isd == 2){
+        } else if(this.isd == 2){
           this.$router.push('/apply')
-       }
-       else if(this.isd == 3){
+        }
+        else if(this.isd == 3){
           this.$router.push('/home/lding')
         }
-       else{
+        else {
           this.$router.push('/home/spread')
-       }
-      },isUser(){
-         if(this.users == null){
+        }
+      }, isUser(){
+        if(this.users == null){
           this.$router.push('/login')
-        }else{
-         this.$router.push('/home/user')
-       }
+        } else {
+          this.$router.push('/home/user')
+        }
       }
     }
   }
@@ -117,7 +117,7 @@
     #footer{
       height:8%;
       background:#ffffff;
-      border-top: 1px solid rgba(159, 159, 159, 0.58);
+      border-top:1px solid rgba(159, 159, 159, 0.58);
       .link{
         color:#000000;
       }

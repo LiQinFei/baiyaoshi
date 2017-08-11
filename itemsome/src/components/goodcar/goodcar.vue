@@ -10,11 +10,10 @@
             <img :src="item.goods_img" alt="">
           </div>
           <div>
-            <div class="del"><span>删除</span></div>
+            <div class="del" v-on:click="dels(item.goods_id,$event)"><span>删除</span></div>
             <p> {{item.goods_name}}</p>
-            <span>{{item.spec_key_name}}</span>
             <ul>
-               <li>￥{{item.goods_price}}</li>
+              <li>￥{{item.goods_price}}</li>
               <li>
                 <div class="aui-list-item-inner">
                   <div class="aui-list-item-right">
@@ -23,7 +22,7 @@
                         <i class="aui-iconfont aui-icon-minus"></i>
                       </div>
                       <div class="aui-bar-btn-item">
-                      {{item.goods_num}}
+                        {{item.goods_num}}
                       </div>
                       <div class="aui-bar-btn-item" @click="plus(index)">
                         <i class="aui-iconfont aui-icon-plus"></i>
@@ -39,8 +38,7 @@
 
       <div class="foots">
         <div>
-          合计：￥
-          {{allpri}}
+          合计：￥ {{allpri}}
         </div>
         <div>
           结算
@@ -55,98 +53,141 @@
   export default {
     data() {
       return {
-        users: [],
-        datas: [],
-        num:1,
-        checkedNames: [],
-        getdata:[]
+        users : [],
+        datas : [],
+        num : 1,
+        checkedNames : [],
+        getdata : []
       }
-    },computed:{
+    }, computed : {
       allpri(){
         let allpris = 0
         let allit = this.datas
         let selit = this.checkedNames
         this.getdata = [];
-        for(let i = 0; i<selit.length;i++){
-          for(let y = 0; y<allit.length;y++){
+        for(let i = 0; i < selit.length; i++){
+          for(let y = 0; y < allit.length; y++){
             if(selit[i] == allit[y].goods_id){
 
-              allpris = Number(allpris) + (this.datas[y].goods_num*this.datas[y].goods_price)
-              let olone = [selit[i] , this.datas[y].goods_num]
+              allpris = Number(allpris) + (this.datas[y].goods_num * this.datas[y].goods_price)
+              let olone = [selit[i], this.datas[y].goods_num]
               this.getdata.push(olone)
 
             }
           }
         }
         console.log(this.getdata)
-        return allpris
-
+        return Math.floor(allpris * 100) / 100
       }
     },
     created() {
       this.users = JSON.parse(localStorage.getItem("users"));
       let that = this;
-      Vue.nextTick(function () {
-        that.$http({
-          method: 'post',
-          url: commonUrl + api + "/index.php?m=mobile&c=User&a=goods_list",
-          data: {
-            user_id: that.users.user_id
+        this.$http({
+          method : 'post',
+          url : commonUrl + api + "/index.php?m=mobile&c=User&a=goods_list",
+          data : {
+            user_id : that.users.user_id
           }
-        }).then(function (res) {
+        }).then(function(res){
           that.datas = res.data
           console.log(that.datas)
-        }).catch(function (err) {
+        }).catch(function(err){
           console.log('网络错误')
         })
-      })
+
     }, beforeRouteEnter(to, from, next) {
       let oo = JSON.parse(localStorage.getItem("users"));
-      if (oo == null) {
-        next({ path: '/login' })
+      if(oo == null){
+        next({path : '/login'})
       }
       else {
         next()
       }
     },
-    methods: {
-      removes: function (index) {
-        let dom = $('.finish');
-        /*  $(e.target).parents('.finish').remove()*/
-        dom.eq(index).hide(500);
+    methods : {
+      dels : function(ids, event){
+
+        let that = this
+
+
+        dialog.alert({
+          title : "提示",
+          msg : '确定删除吗？',
+          buttons : ['取消', '确定']
+        }, function(ret){
+          if(ret.buttonIndex == 2){
+            toast.loading({
+              title : "加载中",
+              duration : 2000
+            });
+
+            that.$http({
+              method : 'post',
+              url : commonUrl + api + "/index.php?m=mobile&c=User&a=goods_delete",
+              data : {
+                user_id : that.users.user_id,
+                goods_id : ids
+                //user_id:4922
+              }
+            }).then(function(res){
+              toast.hide();
+              if(res.data.status == 1){
+                toast.success({
+                  title : '删除成功',
+                  duration : 2000
+                });
+                $(event.target).parents('.waitPay').hide(500)
+              } else {
+                toast.fail({
+                  title : res.data.msg,
+                  duration : 2000
+                });
+              }
+            }).catch(function(err){
+              toast.hide()
+              toast.fail({
+                title : "网络错误",
+                duration : 2000
+              });
+            })
+          }
+        })
+
+
       }
-      ,plus(index){
+      , plus(index){
         // let pri =  this.datas[index].goods_price
         let nums = this.datas[index].goods_num
-          //let olone = pri/nums
+        //let olone = pri/nums
         //this.datas[index].goods_price = Number(this.datas[index].goods_price) + Number(olone)
         //console.log(olone)
         this.datas[index].goods_num++;
-      },mins(index){
-      //  let pri =  this.datas[index].goods_price
+      }, mins(index){
+        //  let pri =  this.datas[index].goods_price
         let nums = this.datas[index].goods_num
         //let olone = pri/nums
-        if(nums<2){
+        if(nums < 2){
           return false;
         }
-       // this.datas[index].goods_price = Number(this.datas[index].goods_price) - Number(olone)
+        // this.datas[index].goods_price = Number(this.datas[index].goods_price) - Number(olone)
         this.datas[index].goods_num--;
 
       }
 
-          //console.log(e.path[6])
-        //this.num ++
-    /*
+      //console.log(e.path[6])
+      //this.num ++
+      /*
 
 
-      }*/
-    },beforeCreate(){
+       }*/
+    }, beforeCreate(){
       toast.loading({
-        title:"加载中",
-        duration:2000
+        title : "加载中",
+        duration : 2000
       });
     }
-    ,updated(){
+    , updated(){
       toast.hide()
     }
   }
@@ -154,45 +195,44 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  .orderAlls {
-    background: #E5E5E5;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  .orderAlls{
+    background:#e5e5e5;
+    width:100%;
+    height:100%;
+    overflow:auto;
     padding-bottom:2.5rem;
     overflow:auto;
     /*等待付款*/
-    .waitPay {
-      background: #ffffff;
-      font-size: 0.6rem;
-      margin: 0.5rem 0;
+    .waitPay{
+      background:#ffffff;
+      font-size:0.6rem;
+      margin:0.5rem 0;
       &:first-child{
-        margin-top: 0;
+        margin-top:0;
       }
-      .tops {
-        display: flex;
-        &>div {
+      .tops{
+        display:flex;
+        & > div{
 
-          &:first-child {
-            flex: 1;
-            padding-left: 0.5rem;
+          &:first-child{
+            flex:1;
+            padding-left:0.5rem;
           }
-          &:last-child {
-            flex: 0 0 4rem;
-            padding-right: 0.5rem;
-            text-align: right;
+          &:last-child{
+            flex:0 0 4rem;
+            padding-right:0.5rem;
+            text-align:right;
           }
         }
-        height: 2rem;
-        line-height: 2rem;
+        height:2rem;
+        line-height:2rem;
       }
-      .cont {
-        width: 100%;
-        display: flex;
-
-        border-top: 1px solid #D3D3D3;
-        &>div {
-          &:first-child {
+      .cont{
+        width:100%;
+        display:flex;
+        border-top:1px solid #d3d3d3;
+        & > div{
+          &:first-child{
             flex:0 0 2rem;
             position:relative;
             input{
@@ -200,52 +240,52 @@
               position:absolute;
               left:50%;
               top:50%;
-              transform:translate(-50%,-50%);
+              transform:translate(-50%, -50%);
               width:1rem;
               height:1rem;
             }
           }
           &:nth-child(2){
-            flex: 0 0 5rem;
+            flex:0 0 5rem;
           }
-          &:last-child {
-            flex: 1;
+          &:last-child{
+            flex:1;
             .del{
               width:100%;
               text-align:right;
               padding:0.3rem 1rem 0 0;
               span{
-               font-size:0.7rem;
+                font-size:0.7rem;
+                color:red;
               }
             }
-            p {
-              padding: 0 0.3rem 0 0.5rem;
-
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 2;
-              -webkit-box-orient: vertical;
+            p{
+              padding:0 0.3rem 0 0.5rem;
+              overflow:hidden;
+              text-overflow:ellipsis;
+              display:-webkit-box;
+              -webkit-line-clamp:2;
+              -webkit-box-orient:vertical;
             }
-            span {
-              font-size: 0.6rem;
-              padding-left: 1rem;
-              white-space: nowrap;
+            span{
+              font-size:0.6rem;
+              padding-left:1rem;
+              white-space:nowrap;
             }
-            ul {
-              width: 100%;
-              display: flex;
-              padding: 0 0.3rem 0 0.5rem;
-              li {
-                flex: 1;
+            ul{
+              width:100%;
+              display:flex;
+              padding:0 0.3rem 0 0.5rem;
+              li{
+                flex:1;
                 &:nth-child(1){
                   text-align:left;
                   line-height:1.5rem;
-               }
-                &:nth-child(2) {
-               /*   text-align: right;
-                  padding-right: 0.5rem;
-                  color: #FEADAD;*/
+                }
+                &:nth-child(2){
+                  /*   text-align: right;
+                     padding-right: 0.5rem;
+                     color: #FEADAD;*/
 
                   /*&>div{
                     height:1rem;
@@ -259,7 +299,7 @@
       }
 
     }
-    .foots {
+    .foots{
       /* border-top: 1px solid #D3D3D3;
        display: flex;
        &>div {
@@ -292,7 +332,7 @@
         }
         &:last-child{
           flex:0 0 6rem;
-          background:#FF6801;
+          background:#ff6801;
           text-align:center;
           line-height:2.5rem;
           font-size:0.8rem;

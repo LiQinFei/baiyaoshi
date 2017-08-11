@@ -102,7 +102,7 @@
             </div>
           </div>
         </li>
-        <li class="card">
+     <!--   <li class="card">
           <div class="ahead">
             <div class="tops">请上传您银行卡背面照片 <span>(防伪码在前)</span></div>
             <div class="center">
@@ -118,7 +118,7 @@
               </div>
             </div>
           </div>
-        </li>
+        </li>-->
       </ul>
     </div>
 
@@ -137,7 +137,7 @@
         imgone : '',
         imgtwo : '',
         imgthree : '',
-        imgfour : '',
+        /*imgfour : '',*/
         phone:'',
         name:'',
         sex:'',
@@ -148,7 +148,7 @@
     }, computed : {}, methods : {
       send() {
         let that = this
-        if (this.imgone=='' || this.imgtwo=='' || this.imgthree =='' || this.imgfour == '' || this.phone ==''|| this.name =='' || this.sex ==''|| this.bankNum ==''||this.bankT =='' || this.userNum =='') {
+        if (this.imgone=='' || this.imgtwo=='' || this.imgthree ==''|| this.phone ==''|| this.name =='' || this.sex ==''|| this.bankNum ==''||this.bankT =='' || this.userNum =='') {
           toast.fail({
             title:"资料不能有空",
             duration:1000
@@ -171,7 +171,7 @@
               user_self_img1:that.imgone,
               user_self_img2:that.imgtwo,
               bank_img1:that.imgthree,
-              bank_img2:that.imgfour,
+            /*  bank_img2:that.imgfour,*/
               bank_name:that.bankT
             }
           }).then(function (res) {
@@ -209,7 +209,7 @@
           let imgSize = file.size;
 
 
-          if(imgSize < 1024 * 1024 *2.5){
+          if(imgSize < 1024 * 1024 *3){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -219,7 +219,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于2500k",
+              title:"图片必须小于3000k",
               duration:1000
             });
           }
@@ -228,7 +228,7 @@
           let file = document.getElementById('twos').files[0];
           let imgSize = file.size;
 
-          if(imgSize < 1024 * 1024 *2.5){
+          if(imgSize < 1024 * 1024 *3){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -238,7 +238,7 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于2500k",
+              title:"图片必须小于3000k",
               duration:1000
             });
           }
@@ -247,7 +247,7 @@
         $("#threes").change(function(){
           let file = document.getElementById('threes').files[0];
           let imgSize = file.size;
-          if(imgSize < 1024 * 1024 *2.5){
+          if(imgSize < 1024 * 1024 *3){
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(event){
@@ -257,13 +257,13 @@
             };
           } else {
             toast.fail({
-              title:"图片必须小于2500k",
+              title:"图片必须小于3000k",
               duration:1000
             });
           }
 
         });
-        $("#fours").change(function(){
+      /*  $("#fours").change(function(){
           let file = document.getElementById('fours').files[0];
           let imgSize = file.size;
           if(imgSize < 1024 * 1024 *2.5){
@@ -280,7 +280,7 @@
               duration:1000
             });
           }
-        });
+        });*/
       })
     }
   }

@@ -44,114 +44,111 @@
 <script>
 
   export default {
-/*    created(){
-        Vue.directive('title', {
-          inserted: function (el, binding) {
-            document.title = el.dataset.title
-          }
-        })
+    /*    created(){
+     Vue.directive('title', {
+     inserted: function (el, binding) {
+     document.title = el.dataset.title
+     }
+     })
 
-    }*/
+     }*/
     data(){
-      return{
-        users:[]
+      return {
+        users : []
       }
-    },created() {
+    }, created() {
 
     },
-    methods:{
-
-    }
+    methods : {}
 
 
   }
-</script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+</script><!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  .homepageA {
-    background: #ffffff;
-    height: 100%;
-    width: 100%;
-    .nav {
-      width: 100%;
-      height: 2.5rem;
-      background: #ffffff;
-      position: fixed;
-      z-index: 2;
-      top: 0;
-      .navT {
-        width: 100%;
-        height: 100%;
-        padding: 0 1rem;
-        display: flex;
-        li {
-          flex: 1;
-          position: relative;
-          span {
-            position: absolute;
-            display: inline-block;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-            padding: 0.1rem 0.4rem;
-            border: 1px solid #343434;
-            border-radius: 5px;
+  .homepageA{
+    background:#ffffff;
+    height:100%;
+    width:100%;
+    .nav{
+      width:100%;
+      height:2.5rem;
+      background:#ffffff;
+      position:fixed;
+      z-index:2;
+      top:0;
+      .navT{
+        width:100%;
+        height:100%;
+        padding:0 1rem;
+        display:flex;
+        li{
+          flex:1;
+          position:relative;
+          span{
+            position:absolute;
+            display:inline-block;
+            left:50%;
+            top:50%;
+            transform:translate(-50%, -50%);
+            white-space:nowrap;
+            padding:0.1rem 0.4rem;
+            border:1px solid #343434;
+            border-radius:5px;
             font-size:0.6rem;
           }
         }
       }
     }
-    .home_c {
-      padding: 2.6rem 0.4rem 0;
-      height: 100%;
-      overflow: auto;
+    .home_c{
+      padding:2.6rem 0.4rem 0;
+      height:100%;
+      overflow:auto;
 
-      .list {
-        li {
-          border-radius: 5px;
-          margin-bottom: 0.5rem;
-          box-shadow: 0 0 5px 3px #ccc;
-          width: 100%;
+      .list{
+        li{
+          border-radius:5px;
+          margin-bottom:0.5rem;
+          box-shadow:0 0 5px 3px #ccc;
+          width:100%;
           a{
             width:100%;
-            display: flex;
+            display:flex;
           }
-          .listL {
-            flex: 0 0 5rem;
-            img {
-              width: 100%;
+          .listL{
+            flex:0 0 5rem;
+            img{
+              width:100%;
             }
           }
-          .listR {
-            flex: 1;
-            padding: 0.4rem;
-            & > p {
-              height: 2.5rem;
-              font-size: 0.7rem;
+          .listR{
+            flex:1;
+            padding:0.4rem;
+            & > p{
+              height:2.5rem;
+              font-size:0.7rem;
             }
 
-            .listRB {
-              position: relative;
-              .num {
-                font-size: 0.6rem;
+            .listRB{
+              position:relative;
+              .num{
+                font-size:0.6rem;
               }
-              .money {
-                font-size: 0.8rem;
-                font-weight: bold;
-                color: #FF6801;
+              .money{
+                font-size:0.8rem;
+                font-weight:bold;
+                color:#ff6801;
               }
-              .icon {
-                position: absolute;
-                right: 0;
-                top: 0.6rem;
-                width: 3rem;
-                height: 1.4rem;
-                color: #FF6801;
-                text-align: center;
-                line-height: 1.4rem;
-                i {
-                  color: #ffffff;
+              .icon{
+                position:absolute;
+                right:0;
+                top:0.6rem;
+                width:3rem;
+                height:1.4rem;
+                color:#ff6801;
+                text-align:center;
+                line-height:1.4rem;
+                i{
+                  color:#ffffff;
                 }
               }
             }
