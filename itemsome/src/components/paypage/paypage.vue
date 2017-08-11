@@ -75,9 +75,6 @@
     data(){
       return {
         users : [],
-        /* nums:[
-         {ipone:'15888555555',add:'广东省深圳市南山区洱海大道冰海大道87号55'}
-         ],*/
         qwerqwre : "0",
         datagoods : [],
         dataadd : []
