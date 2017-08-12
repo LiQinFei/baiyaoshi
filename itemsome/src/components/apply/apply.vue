@@ -121,11 +121,7 @@
         </li>-->
       </ul>
     </div>
-
-
       <div class="aui-btn aui-btn-warning aui-btn-block" @click="send()">提交注册申请</div>
-
-
   </div>
 </template>
 <script>

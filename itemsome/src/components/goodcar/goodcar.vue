@@ -38,6 +38,7 @@
 
       <div class="foots">
         <div>
+
           合计：￥ {{allpri}}
         </div>
         <div>
@@ -68,11 +69,9 @@
         for(let i = 0; i < selit.length; i++){
           for(let y = 0; y < allit.length; y++){
             if(selit[i] == allit[y].goods_id){
-
               allpris = Number(allpris) + (this.datas[y].goods_num * this.datas[y].goods_price)
               let olone = [selit[i], this.datas[y].goods_num]
               this.getdata.push(olone)
-
             }
           }
         }
@@ -159,7 +158,6 @@
       , plus(index){
         // let pri =  this.datas[index].goods_price
         let nums = this.datas[index].goods_num
-        //let olone = pri/nums
         //this.datas[index].goods_price = Number(this.datas[index].goods_price) + Number(olone)
         //console.log(olone)
         this.datas[index].goods_num++;
@@ -178,8 +176,6 @@
       //console.log(e.path[6])
       //this.num ++
       /*
-
-
        }*/
     }, beforeCreate(){
       toast.loading({
