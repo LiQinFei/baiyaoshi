@@ -14,13 +14,11 @@
       </div>
     </router-link>
     <div class="share">
-      <span>剩余点券:{{datas.share_car}}</span>
+      <span>剩余积分:{{datas.share_car}}</span>
       <span>剩余兑换豆:{{datas.share_bean}}</span>
     </div>
     <div class="order">
-
       <div class="order_t">
-
         <div>
           <span>我的订单</span>
         </div>
@@ -31,7 +29,6 @@
           </router-link>
         </div>
       </div>
-
       <div class="order_con">
         <ul>
           <li>
@@ -57,7 +54,6 @@
               <i class="iconfont icon-yiwancheng"></i>
               <p>已完成</p>
             </router-link>
-
           </li>
         </ul>
       </div>
@@ -68,7 +64,6 @@
           <div>
             <i class="iconfont icon-shouhuodizhi"></i>
           </div>
-
           <div>
             <router-link to="/address">
               管理地址
@@ -76,7 +71,6 @@
             </router-link>
           </div>
         </li>
-
         <li>
           <div>
             <i class="iconfont icon-msnui-market"></i>
@@ -86,7 +80,6 @@
               <i class="aui-iconfont aui-icon-right"></i>
           </div>
         </li>
-
         <li>
           <div>
             <i class="aui-iconfont aui-icon-cart"></i>
@@ -227,13 +220,25 @@ export default {
       this.$router.push('/login')
     },
     isDistribut(){
-      if(this.isd == 1){
+      let that = this
+      if (this.isd == 1){
+        dialog.alert({
+          title : "提示",
+          msg : '请先购买A商城产品成为会员',
+          buttons : ['确定']
+        }, function(ret){
+          if(ret.buttonIndex == 1){
+            that.$router.push('/home/homepage/homepageA')
+          }
+        })
+      } else if(this.isd == 2){
         this.$router.push('/apply')
-      } else if(this.isd == 3){
-        this.$router.push('/home/spread')
       }
-      else{
+      else if(this.isd == 3){
         this.$router.push('/home/lding')
+      }
+      else {
+        this.$router.push('/home/spread')
       }
     }
 

@@ -120,8 +120,6 @@
       } else {
         next()
       }
-
-
     },
     methods : {
       downP : function(){

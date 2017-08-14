@@ -13,7 +13,6 @@
           <router-link to="/address">
             <i class="aui-iconfont aui-icon-pencil"></i>
           </router-link>
-
         </div>
       </li>
     </ul>
@@ -52,7 +51,6 @@
           </div>
         </div>
       </div>
-      {{getdata}}
       <div class="foots">
         <div>
 
@@ -74,7 +72,7 @@
         datas : [],
         num : 1,
         checkedNames : [],
-        getdata : [],
+        getdata : '',
         dataadd : []
       }
     }, computed : {
@@ -82,13 +80,15 @@
         let allpris = 0
         let allit = this.datas
         let selit = this.checkedNames
-        this.getdata = [];
+        this.getdata = '';
         for(let i = 0; i < selit.length; i++){
           for(let y = 0; y < allit.length; y++){
             if(selit[i] == allit[y].goods_id){
               allpris = Number(allpris) + (this.datas[y].goods_num * this.datas[y].goods_price)
-              let olone = [selit[i], this.datas[y].goods_num]
-              this.getdata.push(olone)
+              /*let olone = [selit[i], this.datas[y].goods_num]*/
+              /*this.getdata.push(olone)*/
+              let olone = selit[i] +','+ this.datas[y].goods_num
+              this.getdata = this.getdata + olone+';'
             }
           }
         }
@@ -225,9 +225,8 @@
               type : 2
             }
           }).then(function(res){
-       /*
             toast.hide();
-            console.log(res)
+
             // console.log(that.nums)
             if(res.data.status == 1){
               toast.success({
@@ -240,7 +239,7 @@
                 title:res.data.msg,
                 duration:1000
               });
-            }*/
+            }
       console.log(res)
           }).catch(function(err){
             console.log('网络错误')
