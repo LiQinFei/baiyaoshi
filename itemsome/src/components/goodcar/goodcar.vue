@@ -1,5 +1,22 @@
 <template>
   <div class="orderAlls" v-title data-title="购物车">
+    <ul class="tops">
+      <li>
+        <div>
+          {{dataadd.consignee}}
+        </div>
+        <div>
+          <p>{{dataadd.mobile}}</p>
+          <p>{{dataadd.address}}</p>
+        </div>
+        <div>
+          <router-link to="/address">
+            <i class="aui-iconfont aui-icon-pencil"></i>
+          </router-link>
+
+        </div>
+      </li>
+    </ul>
     <div class="carin">
       <div v-for="(item,index) in datas" class="waitPay">
         <div class="cont">
@@ -35,18 +52,17 @@
           </div>
         </div>
       </div>
-
+      {{getdata}}
       <div class="foots">
         <div>
 
           合计：￥ {{allpri}}
         </div>
-        <div>
+        <div @click="payfor">
           结算
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -58,7 +74,8 @@
         datas : [],
         num : 1,
         checkedNames : [],
-        getdata : []
+        getdata : [],
+        dataadd : []
       }
     }, computed : {
       allpri(){
@@ -75,7 +92,6 @@
             }
           }
         }
-        console.log(this.getdata)
         return Math.floor(allpris * 100) / 100
       }
     },
@@ -95,6 +111,19 @@
           console.log('网络错误')
         })
 
+      that.$http({
+        method : 'post',
+        url : commonUrl + api + "/index.php?m=Mobile&c=goods&a=detail",
+        data : {
+          user_id : that.users.user_id
+        }
+      }).then(function(res){
+        if(res.data.address == null){
+          that.dataadd = ''
+        } else {
+          that.dataadd = res.data.address
+        }
+      })
     }, beforeRouteEnter(to, from, next) {
       let oo = JSON.parse(localStorage.getItem("users"));
       if(oo == null){
@@ -172,6 +201,54 @@
         this.datas[index].goods_num--;
 
       }
+      , payfor(){
+        let that = this
+        if(this.dataadd == ''){
+          dialog.alert({
+            title : "提示",
+            msg : '请点击右上角增加收货地址',
+            buttons : ['确定']
+
+          }, function(ret){
+          })
+        } else {
+          toast.loading({
+            title : "正在加载",
+            duration : 1000
+          });
+          this.$http({
+            method : 'post',
+            url : commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
+            data : {
+              user_id : that.users.user_id,
+              goods_data:that.getdata,
+              type : 2
+            }
+          }).then(function(res){
+       /*
+            toast.hide();
+            console.log(res)
+            // console.log(that.nums)
+            if(res.data.status == 1){
+              toast.success({
+                title : '已购买成功',
+                duration : 2000
+              });
+             that.$router.push('/orderAll/orderAlls')
+            }else {
+              toast.fail({
+                title:res.data.msg,
+                duration:1000
+              });
+            }*/
+      console.log(res)
+          }).catch(function(err){
+            console.log('网络错误')
+          })
+        }
+
+
+      }
 
       //console.log(e.path[6])
       //this.num ++
@@ -198,18 +275,47 @@
     overflow:auto;
     padding-bottom:2.5rem;
     overflow:auto;
+
+    .tops{
+      width:100%;
+      background:#ffffff;
+      li{
+        width:100%;
+        display:flex;
+        padding:0.5rem 0.2rem;
+        border-bottom:1px solid #c7c7c7;
+        height:4rem;
+        div{
+          &:nth-child(1){
+            flex:0 0 4rem;
+            padding-left:0.2rem;
+            font-size:0.8rem;
+          }
+          &:nth-child(2){
+            flex:1;
+            font-size:0.6rem;
+          }
+          &:nth-child(3){
+            flex:0 0 3rem;
+            text-align:center;
+            line-height:3rem;
+            i{
+              font-size:1.5rem;
+              color:#ff6801;
+            }
+          }
+        }
+      }
+    }
+
     /*等待付款*/
     .waitPay{
       background:#ffffff;
       font-size:0.6rem;
-      margin:0.5rem 0;
-      &:first-child{
-        margin-top:0;
-      }
+      margin:0.2rem 0;
       .tops{
         display:flex;
         & > div{
-
           &:first-child{
             flex:1;
             padding-left:0.5rem;

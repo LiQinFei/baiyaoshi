@@ -78,7 +78,6 @@
         qwerqwre : "0",
         datagoods : [],
         dataadd : []
-
       }
     }, beforeCreate(){
       toast.loading({
@@ -93,8 +92,6 @@
       this.users = JSON.parse(localStorage.getItem("users"));
       console.log(this.$route.params.id)
       let that = this;
-
-
       that.$http({
         method : 'post',
         url : commonUrl + api + "/index.php?m=Mobile&c=goods&a=detail",
