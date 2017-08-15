@@ -214,7 +214,14 @@ export default new Router({
         name: 'help',
         /*code*/
         component: resolve => require(['../components/help/help.vue'], resolve)
-      },{
+      },
+      {
+        path: '/helpde',
+        name: 'helpde',
+        /*code*/
+        component: resolve => require(['../components/helpde/helpde.vue'], resolve)
+      }
+      ,{
         path: '/goodcar',
         name: 'goodcar',
         /*code*/

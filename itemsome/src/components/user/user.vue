@@ -106,8 +106,10 @@
             <i class="aui-iconfont aui-icon-question"></i>
           </div>
           <div>
+            <router-link to="/help">
             帮助
             <i class="aui-iconfont aui-icon-right"></i>
+            </router-link>
           </div>
         </li>
 
