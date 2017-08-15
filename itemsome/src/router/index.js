@@ -205,6 +205,12 @@ export default new Router({
         /*code*/
         component: resolve => require(['../components/code/code.vue'], resolve)
       },{
+        path: '/mingxi',
+        name: 'mingxi',
+        /*code*/
+        component: resolve => require(['../components/mingxi/mingxi.vue'], resolve)
+      }
+      ,{
         path: '/codepay',
         name: 'codepay',
         /*code*/

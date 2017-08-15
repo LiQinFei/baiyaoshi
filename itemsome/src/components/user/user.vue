@@ -61,6 +61,17 @@
     <div class="guanli">
       <ul>
         <li>
+          <div style="padding-left:0.7rem ">
+            <i class="aui-iconfont aui-icon-edit"></i>
+          </div>
+          <div>
+            <router-link to="/mingxi">
+              账户明细
+              <i class="aui-iconfont aui-icon-right"></i>
+            </router-link>
+          </div>
+        </li>
+        <li>
           <div>
             <i class="iconfont icon-shouhuodizhi"></i>
           </div>

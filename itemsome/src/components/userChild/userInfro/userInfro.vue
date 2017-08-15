@@ -1,7 +1,7 @@
 <template>
   <div class="userInfor" v-title data-title="个人信息">
     <div class="banner">
-      <img src="./xtx.png" alt="" id="imgs">
+      <img :src="imgl" alt="" id="imgs">
       <p>点击修改图片</p>
       <input type="file" id="files" accept="image/*" enctype="multipart/form-data">
     </div>
@@ -10,7 +10,7 @@
         <li>
           <div class="inleft">手机</div>
           <router-link to="/testing">
-            <input type="text" value="136****4419" disabled="true">
+            <input type="text" v-model="shouji" disabled="true">
             <i class="aui-iconfont aui-icon-right"></i>
           </router-link>
         </li>
@@ -32,8 +32,9 @@
           </div>
           <div class="aui-list-item-input">
             <select v-model="selected">
-              <option selected="selected">男</option>
-              <option>女</option>
+              <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+              </option>
             </select>
           </div>
         </li>
@@ -52,13 +53,26 @@ import Vue from 'vue'
 export default {
   data() {
     return {
+      shouji:'',
+      datas:'',
       users: [],
       nickname: '',
-      selected: '',
       head_pic: '',
-      imgl: ''
+      imgl: '',
+      selected: 0,
+      options: [
+        { text: '男', value: 1 },
+        { text: '女', value: 2},
+        { text: '保密', value: 0 }
+      ]
     }
-  },updated(){
+  },beforeCreate(){
+    toast.loading({
+      title:"加载中",
+      duration:2000
+    });
+  }
+  ,updated(){
     toast.hide()
   },
   created() {
@@ -66,6 +80,24 @@ export default {
     this.users = JSON.parse(localStorage.getItem("users"));
 
     let that = this
+
+    this.$http({
+      method: 'post',
+      url: commonUrl + api + "/index.php?m=Mobile&c=user&a=change_info",
+      data: {
+        user_id: this.users.user_id,
+
+      }
+    }).then(function (res) {
+
+      that.nickname = res.data.nickname
+      that.shouji = res.data.mobile
+      that.imgl = res.data.head_pic
+      that.selected = res.data.sex
+      })
+
+
+
     Vue.nextTick(function () {
       //读取图片
       $("#files").change(function (){
@@ -77,7 +109,6 @@ export default {
           reader.onload = function(event){
             let txt = event.target.result;
             that.imgl = txt
-            $('#imgs').attr('src', txt)
 
           };
         } else {
@@ -89,6 +120,9 @@ export default {
 
       });
     })
+
+
+
   }, methods: {
     save() {
       let that = this
