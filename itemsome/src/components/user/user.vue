@@ -103,7 +103,7 @@
           </div>
         </li>
 
-        <li>
+        <!--<li>
           <div>
             <i class="iconfont icon-kefu"></i>
           </div>
@@ -111,7 +111,7 @@
             客服
             <i class="aui-iconfont aui-icon-right"></i>
           </div>
-        </li>
+        </li>-->
         <li>
           <div>
             <i class="aui-iconfont aui-icon-question"></i>
@@ -170,7 +170,6 @@
               奖金公益
               <i class="aui-iconfont aui-icon-right"></i>
             </router-link>
-
           </div>
         </li>
       </ul>
