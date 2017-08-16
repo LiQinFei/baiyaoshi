@@ -66,8 +66,6 @@
 <div class="butt">
   <div class="aui-btn" @click="tixian">申请提现</div>
 </div>
-
-
   </div>
 </template>
 <script>

@@ -15,9 +15,6 @@
       </ul>
     </div>
   </div>
-
-
-
 </template>
 <script>
   import Vue from 'vue'
@@ -38,14 +35,9 @@
       },
     created() {
         /*轮播图的字动*/
-
-
-
-
     },
     methods:{
       helpde(index){
-
         this.$router.push({ name: 'helpde', params: { indexId: index }})
       }
     }

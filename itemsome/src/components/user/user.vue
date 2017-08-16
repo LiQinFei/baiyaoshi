@@ -1,15 +1,15 @@
 <template>
   <div class="user" v-title data-title="个人中心">
-    <router-link to="/userInfor">
-      <div class="user_head">
-        <div class="sh_l">
-          <img :src="datas.head_pic">
-        </div>
-        <div class="sh_r">
-          <p class="name">{{datas.nickname}}</p>
-          <p class="num">账号：{{datas.mobile}}</p>
-          <p class="num">推广人:{{datas.user_ang}}</p>
-          <i class="aui-iconfont aui-icon-right"></i>
+          <router-link to="/userInfor">
+            <div class="user_head">
+              <div class="sh_l">
+                <img :src="datas.head_pic">
+              </div>
+              <div class="sh_r">
+                <p class="name">{{datas.nickname}}</p>
+                <p class="num">账号：{{datas.mobile}}</p>
+                <p class="num">推广人:{{datas.user_ang}}</p>
+                <i class="aui-iconfont aui-icon-right"></i>
         </div>
       </div>
     </router-link>
@@ -210,12 +210,11 @@ export default {
           user_id: that.users.user_id
         }
       }).then(function (res) {
-        // that.nums = res.data
-        // console.log(that.nums)
+    
         that.datas = res.data
-        console.log(that.datas)
+    
       }).catch(function (err) {
-        console.log('网络错误')
+      
       })
     })
   }, beforeRouteEnter(to, from, next) {
