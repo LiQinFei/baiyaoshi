@@ -177,7 +177,7 @@ export default new Router({
             component: resolve => require(['../components/forgetlogin2/forgetlogin2.vue'], resolve)
         },
         {
-            path: '/details/:id',
+            path: '/details/:id/:ids',
             name: 'details',
             /*商品详情*/
             component: resolve => require(['../components/details/details.vue'], resolve)
@@ -204,7 +204,14 @@ export default new Router({
         name: 'code',
         /*code*/
         component: resolve => require(['../components/code/code.vue'], resolve)
-      },{
+      },
+        {
+        path: '/delist',
+        name: 'delist',
+        /*code*/
+        component: resolve => require(['../components/dellist/delist.vue'], resolve)
+      },
+      {
         path: '/mingxi',
         name: 'mingxi',
         /*code*/

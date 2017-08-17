@@ -9,10 +9,10 @@
           <p>{{dataadd.mobile}}</p>
           <p>{{dataadd.address}}</p>
         </div>
-        <div>
-          <router-link to="/address">
+        <div @click="xiugai">
+          
             <i class="aui-iconfont aui-icon-pencil"></i>
-          </router-link>
+         
 
         </div>
       </li>
@@ -77,7 +77,9 @@
         users : [],
         qwerqwre : "0",
         datagoods : [],
-        dataadd : []
+        dataadd : [],
+         boos:true,
+          goid:''
       }
     }, beforeCreate(){
       toast.loading({
@@ -90,8 +92,8 @@
     },
     created() {
       this.users = JSON.parse(localStorage.getItem("users"));
-      console.log(this.$route.params.id)
       let that = this;
+       this.goid = that.$route.params.id
       that.$http({
         method : 'post',
         url : commonUrl + api + "/index.php?m=Mobile&c=goods&a=detail",
@@ -141,8 +143,14 @@
     , methods : {
       addClassFun : function(index){
         this.qwerqwre = index;
+      },xiugai(){
+        
+       this.$router.push({name : 'address', params : {id : this.goid,ids:this.$route.params.ids}})
+
       }
       , payfor : function(){
+        if(this.boos){
+          this.boos = false
         let that = this
         if(this.dataadd == ''){
           dialog.alert({
@@ -182,7 +190,7 @@
           })
         }
 
-
+      }
       }
     }
   }

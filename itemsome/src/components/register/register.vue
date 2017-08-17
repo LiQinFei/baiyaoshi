@@ -46,7 +46,7 @@ export default {
   created() {
 
       this.tuima = this.$route.query.code
-    console.log(this.tuima)
+   
   },
   methods: {
     //发送验证码

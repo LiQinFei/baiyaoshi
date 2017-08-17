@@ -71,15 +71,16 @@
             </router-link>
           </div>
         </li>
-        <li>
+        <li @click="guanli">
           <div>
             <i class="iconfont icon-shouhuodizhi"></i>
           </div>
           <div>
-            <router-link to="/address">
+        
+          
               管理地址
               <i class="aui-iconfont aui-icon-right"></i>
-            </router-link>
+          
           </div>
         </li>
         <li>
@@ -252,7 +253,9 @@ export default {
         this.$router.push('/home/spread')
       }
     }
-
+  ,guanli(){
+       this.$router.push({name : 'address', params : {id : 'wu'}})
+  }
 
   }
 }

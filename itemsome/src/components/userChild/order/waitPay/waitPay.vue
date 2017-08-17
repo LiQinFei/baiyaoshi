@@ -1,5 +1,5 @@
 <template>
-  <div class="orderAlls" v-title data-title="所有订单">
+  <div class="orderAlls" v-title data-title="待付款">
 
     <!--待付款-->
     <!-- <div class="waitPay">
@@ -29,7 +29,7 @@
      </div> -->
     <div>
 
-      <div v-for="item in datas" class="waitPay">
+      <div v-for="item in datas" @click="xiangqing(item.order_id)" class="waitPay">
         <div class="tops">
           <div>订单编号：{{item.order_sn}}</div>
           <div>取消订单</div>
@@ -107,6 +107,9 @@ export default {
       let dom = $('.finish');
       /*  $(e.target).parents('.finish').remove()*/
       dom.eq(index).hide(500);
+    }, xiangqing(id){
+      
+       this.$router.push({name : 'delist', params : {ordid : id}})
     }
   },beforeCreate(){
     toast.loading({

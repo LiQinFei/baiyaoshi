@@ -69,8 +69,7 @@
           toast.hide()
         }
 
-      })
-      console.log(this.$route.params.id)
+      })   
       if(this.$route.params.id == 'baiyao'){
         this.boos = true;
       } else {
@@ -86,10 +85,10 @@
           this.$router.push('/login')
         } else {
           //this.$router.push('/paypage')
-          if(this.$route.params.id == 'baiyao'){
-            this.$router.push({name : 'pagea', params : {id : this.id}})
+          if(this.$route.params.ids == 'A'){
+            this.$router.push({name : 'pagea', params : {id : this.id,ids:this.$route.params.ids}})
           } else {
-            this.$router.push({name : 'paypage', params : {id : this.id}})
+            this.$router.push({name : 'paypage', params : {id : this.id,ids:this.$route.params.ids}})
           }
 
         }
@@ -102,11 +101,10 @@
             goods_id : this.$route.params.id
           }
         }).then(function(res){
-          // that.nums = res.data
-          // console.log(that.nums)
+        
 
           let zhuan = res.data.goods_content
-          //          console.log(that.datas)
+         
 
 
           function unescape(str){
@@ -117,11 +115,11 @@
 
           that.datas = unescape(zhuan)
         }).catch(function(err){
-          console.log('网络错误')
+         
         })
       }, gowu(id){
         let that = this
-        console.log(this.users)
+   
 
         if(this.users == null){
           dialog.alert({
@@ -146,7 +144,7 @@
               goods_id : id
             }
           }).then(function(res){
-            console.log(res)
+      
             toast.hide();
             if(res.data.status == 1){
               dialog.alert({

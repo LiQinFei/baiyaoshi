@@ -3,8 +3,7 @@
 
     <div v-for="item in datas" class="lists">
       <!--待付款-->
-
-      <div v-if="item.order_status == 0" class="waitPay">
+      <div v-if="item.order_status == 0" @click="xiangqing(item.order_id)"  class="waitPay">
         <div class="tops">
           <div>订单编号：{{item.order_sn}}</div>
           <div>取消订单</div>
@@ -35,7 +34,7 @@
       </div>
 
       <!--待发货-->
-      <div v-else-if="item.order_status == 1" class="waitSend">
+      <div v-else-if="item.order_status == 1"  @click="xiangqing(item.order_id)" class="waitSend">
         <div class="tops">
           <div>订单编号：{{item.order_sn}}</div>
           <div>取消订单</div>
@@ -63,7 +62,7 @@
       </div>
 
       <!--已完成-->
-      <div v-else-if="item.order_status == 3" class="finish">
+      <div v-else-if="item.order_status == 3"  @click="xiangqing(item.order_id)"  class="finish">
         <div class="tops">
           <div>订单编号：{{item.order_sn}}</div>
           <div>
@@ -93,7 +92,7 @@
       </div>
 
       <!--已发货-->
-      <div v-else-if="item.order_status == 2" class="Shipped">
+      <div v-else-if="item.order_status == 2"  @click="xiangqing(item.order_id)"  class="Shipped">
         <div class="tops">
           <div>订单编号：{{item.order_sn}}</div>
           <div>取消订单</div>
@@ -145,7 +144,8 @@ export default {
         }
       }).then(function (res) {
         that.datas = res.data
-        console.log(that.datas[0])
+        console.log(that.datas)
+     
 
       }).catch(function (err) {
         console.log('网络错误')
@@ -163,6 +163,9 @@ export default {
   methods: {
     removes: function (e) {
       $(e.target).parents('.finish').hide(500);
+    }, xiangqing(id){
+      
+       this.$router.push({name : 'delist', params : {ordid : id}})
     }
   },beforeCreate(){
     toast.loading({

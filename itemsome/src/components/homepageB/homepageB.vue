@@ -40,7 +40,7 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="item in dataswiper">
-          <router-link v-bind='{to:"/details/"+item.goods_id}'>
+          <router-link v-bind='{to:"/details/"+item.goods_id+"/B"}'>
             <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
           </router-link>
         </div>
@@ -77,7 +77,7 @@
         <!--</div>-->
         <div class="hot_b">
           <div v-for="item in datasHot">
-            <router-link v-bind='{to:"/details/"+item.goods_id }'>
+            <router-link v-bind='{to:"/details/"+item.goods_id+"/B"}'>
               <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
               <div>
                 <span>{{item.goods_name}}</span> <span>￥{{item.shop_price}}</span>
@@ -121,7 +121,7 @@
         <h2><i></i><span>全部产品</span></h2>
         <ul class="list">
           <li v-for="item in datasall">
-            <router-link v-bind='{to:"/details/"+item.goods_id }'>
+            <router-link v-bind='{to:"/details/"+item.goods_id+"/B"}'>
               <div class="listL">
                 <img v-bind='{src:"http://www.xzljszm.top/"+item.original_img}' alt="">
               </div>
@@ -168,7 +168,7 @@
     }, methods : {
       gowu(id){
         let that = this
-        console.log(this.users)
+       
 
         if(this.users == null){
           dialog.alert({
@@ -193,7 +193,7 @@
               goods_id : id
             }
           }).then(function(res){
-            console.log(res)
+         
             toast.hide();
             if(res.data.status == 1){
               dialog.alert({
@@ -227,8 +227,7 @@
           that.dataswiper = res.data[1][0]
           that.datasHot = res.data[1][1]
           that.datasall = res.data[1][2]
-          console.log(that.datasall)
-          console.log(res)
+       
           Vue.nextTick(function(){
             let mySwiper = new Swiper('.swiper-container', {
               direction : 'horizontal',
@@ -239,7 +238,7 @@
           })
 
         }).catch(function(err){
-          console.log('网络错误')
+      
         })
       }
     }

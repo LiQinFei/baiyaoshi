@@ -53,7 +53,8 @@
         three : '',
         names : '',
         phone : '',
-        address : ''
+        address : '',
+        fanhui:''
 
       }
     },
@@ -74,6 +75,9 @@
     created() {
       this.users = JSON.parse(localStorage.getItem("users"));
       let that = this
+
+     that.fanhui = that.$route.params.id
+ 
       Vue.nextTick(function(){
         let nameEl = document.getElementById('sel_city');
 
@@ -137,7 +141,6 @@
           } else if(index === 1){
             secondChange();
           }
-
           function firstChange(){
             second = [];
             third = [];
@@ -185,11 +188,7 @@
 
         });
 
-        /*picker.on('picker.valuechange', function (selectedVal, selectedIndex) {
-         console.log(selectedVal);
-         console.log(selectedIndex);
-         });*/
-
+    
         nameEl.addEventListener('click', function(){
           picker.show();
         });
@@ -225,7 +224,15 @@
               title : res.data.msg,
               duration : 2000
             });
-            that.$router.push('/address');
+            
+              if(that.fanhui == 'wu'){
+               that.$router.push({name:'address'});
+              }else if(that.$route.params.ids == 'A'){
+                that.$router.push({name:'pagea'});
+              }else if(that.$route.params.ids == 'B'){
+                  that.$router.push({name:'paypage'});
+              }
+              
           } else {
             toast.fail({
               title : '信息填写有误',

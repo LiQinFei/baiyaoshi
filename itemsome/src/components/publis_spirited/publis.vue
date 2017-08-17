@@ -35,7 +35,7 @@
         url: commonUrl + api + "/index.php?m=Mobile&c=user&a=award"
       }).then(function (res) {
           that.datas = res.data.num
-        console.log(res )
+      
         //console.log(res)
       })
 

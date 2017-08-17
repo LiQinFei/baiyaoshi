@@ -54,11 +54,10 @@
 
 
 
-         console.log(res.data)
         that.datas = res.data
 
         }).catch(function(err){
-          console.log('网络错误')
+       
         })
 
     }

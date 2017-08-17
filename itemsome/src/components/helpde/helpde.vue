@@ -68,7 +68,7 @@
     created() {
         /*轮播图的字动*/
       this.indexId = this.$route.params.indexId
-    console.log(this.indexId)
+   
 
 
     },

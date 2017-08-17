@@ -1,5 +1,5 @@
 <template>
-  <div class="orderAlls"  v-title data-title="所有订单">
+  <div class="orderAlls"  v-title data-title="已发货">
 
 
     <!--已发货-->
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>-->
-    <div v-for="item in datas" class="Shipped">
+    <div v-for="item in datas" @click="xiangqing(item.order_id)" class="Shipped">
       <div class="tops">
         <div>订单编号：{{item.order_sn}}</div>
         <div>取消订单</div>
@@ -83,7 +83,7 @@
           }
         }).then(function (res) {
           that.datas = res.data
-          console.log(that.datas[0])
+     
 
         }).catch(function (err) {
           console.log('网络错误')
@@ -99,7 +99,10 @@
       }
     },
     methods: {
-
+ xiangqing(id){
+      
+       this.$router.push({name : 'delist', params : {ordid : id}})
+    }
     },beforeCreate(){
       toast.loading({
         title:"加载中",

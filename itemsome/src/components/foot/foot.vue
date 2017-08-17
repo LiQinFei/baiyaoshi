@@ -52,7 +52,7 @@
         // that.nums = res.data
         // console.log(that.nums)
         that.isd = res.data.is_distribut
-        console.log(res.data.is_distribut)
+     
         localStorage.setItem('is_distribut', res.data.is_distribut);
       }).catch(function(err){
       })

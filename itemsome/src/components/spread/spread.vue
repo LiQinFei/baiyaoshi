@@ -85,7 +85,7 @@
           // console.log(that.nums)
 
           that.datas = res.data
-          console.log(that.datas)
+         
           let levels = res.data.lever - 1
 
           $('.user').css({'left' : that.posi[levels][0], 'bottom' : that.posi[levels][1]});

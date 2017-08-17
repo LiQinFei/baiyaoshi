@@ -101,10 +101,10 @@
         }
       }).then(function (res) {
 
-        console.log(res.data[0])
+     
         that.datas = res.data[0]
       }).catch(function (err) {
-        console.log('网络错误')
+      
       })
 
     },methods:{

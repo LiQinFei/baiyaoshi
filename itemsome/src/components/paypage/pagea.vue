@@ -9,10 +9,8 @@
           <p>{{dataadd.mobile}}</p>
           <p>{{dataadd.address}}</p>
         </div>
-        <div>
-          <router-link to="/address">
+        <div @click="xiugai">
             <i class="aui-iconfont aui-icon-pencil"></i>
-          </router-link>
         </div>
       </li>
     </ul>
@@ -79,7 +77,9 @@
         qwerqwre : "0",
         datas : [],
         datagoods : [],
-        dataadd : []
+        dataadd : [],
+        boos:true,
+        goid:''
       }
     }, beforeCreate(){
       toast.loading({
@@ -93,12 +93,14 @@
     created() {
       this.users = JSON.parse(localStorage.getItem("users"));
       let that = this;
+      this.goid = that.$route.params.id
+      
       that.$http({
         method : 'post',
         url : commonUrl + api + "/index.php?m=Mobile&c=user&a=shop_a",
         data : {
           user_id : that.users.user_id,
-          goods_id : that.$route.params.id
+          goods_id : that.goid
         }
       }).then(function(res){
         that.datagoods = res.data.goods
@@ -107,7 +109,7 @@
         } else {
           that.dataadd = res.data.address
         }
-        console.log(that.dataadd)
+      
         //console.log(res)
       })
 
@@ -139,8 +141,16 @@
     , methods : {
       addClassFun : function(index){
         this.qwerqwre = index;
+      },xiugai(){
+        
+       this.$router.push({name : 'address', params : {id : this.goid,ids:this.$route.params.ids}})
+
       }
       , payfor : function(){
+
+        if(this.boos){
+          this.boos = false
+       
         let that = this
         if(this.dataadd == ''){
           dialog.alert({
@@ -155,6 +165,7 @@
             title : "正在加载",
             duration : 1000
           });
+        
           this.$http({
             method : 'post',
             url : commonUrl + api + "/index.php?m=Mobile&c=user&a=add_order",
@@ -166,7 +177,7 @@
           }).then(function(res){
             // that.nums = res.data
             toast.hide();
-            console.log(res)
+          
             // console.log(that.nums)
 
             if(res.data.status == 1){
@@ -182,8 +193,9 @@
 
         }
 
-
       }
+      }
+
     }
   }
 </script>

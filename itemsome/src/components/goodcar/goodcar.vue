@@ -106,7 +106,7 @@
           }
         }).then(function(res){
           that.datas = res.data
-          console.log(that.datas)
+         
         }).catch(function(err){
           console.log('网络错误')
         })
@@ -240,7 +240,7 @@
                 duration:1000
               });
             }
-      console.log(res)
+
           }).catch(function(err){
             console.log('网络错误')
           })

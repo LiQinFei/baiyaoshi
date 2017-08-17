@@ -40,9 +40,7 @@
       </li>
     </ul>
     <div class="foots">
-      <router-link to="/editAddress">
-        <div class="aui-btn aui-btn-block">新建地址</div>
-      </router-link>
+        <div @click="xiugai" class="aui-btn aui-btn-block">新建地址</div>
     </div>
   </div>
 </template>
@@ -55,6 +53,7 @@
         users : [],
         nums : [],
         qwerqwre : '',
+        allid:''
       }
     }, beforeRouteEnter (to, from, next) {
       let oo = JSON.parse(localStorage.getItem("users"));
@@ -68,6 +67,8 @@
     created() {
       this.users = JSON.parse(localStorage.getItem("users"));
       let that = this;
+        this.allid = that.$route.params.id
+        
       Vue.nextTick(function(){
         that.$http({
           method : 'post',
@@ -78,7 +79,7 @@
           }
         }).then(function(res){
           that.nums = res.data
-          console.log(that.nums)
+      
 
         }).catch(function(err){
           toast.fail({
@@ -97,6 +98,9 @@
       toast.hide()
     }
     , methods : {
+       xiugai(){
+         this.$router.push({name : 'editAddress', params : {id : this.allid,ids:this.$route.params.ids}})
+      },
       addClassFun : function(ids){
         toast.loading({
           title : "加载中",
