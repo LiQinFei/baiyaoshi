@@ -14,7 +14,7 @@
         <transition name="fade">
           <ul v-if="show">
             <li v-for="item in datasList">
-              <router-link v-bind='{to:"/home/homepage/homepageSort/"+item.id}'>{{item.mobile_name}}</router-link>
+              <router-link v-bind='{to:"/home/homepage/homepageSort/"+item.id +"/"+ item.mobile_name }'>{{item.mobile_name}}</router-link>
             </li>
           </ul>
         </transition>
@@ -224,10 +224,11 @@
           // console.log(that.nums)
 
           that.datasList = res.data[0]
+        
           that.dataswiper = res.data[1][0]
           that.datasHot = res.data[1][1]
           that.datasall = res.data[1][2]
-       
+          console.log(that.datasList)
           Vue.nextTick(function(){
             let mySwiper = new Swiper('.swiper-container', {
               direction : 'horizontal',

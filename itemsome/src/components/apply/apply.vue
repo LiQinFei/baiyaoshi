@@ -63,7 +63,7 @@
               <div>
                 <div class="forCard one">
                   <input type="file" id="ones" accept="image/*" enctype="multipart/form-data"> <img id="one" src="./上传图片.png">
-                  <span>(上传传图片小于2M)</span>
+                  <span>(上传图片小于2M)</span>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@
               <div>
                 <div class="forCard one">
                   <input type="file" id="twos" accept="image/*" enctype="multipart/form-data"> <img id="two" src="./上传图片.png">
-                  <span>(上传传图片小于2M)</span>
+                  <span>(上传图片小于2M)</span>
             </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
               <div>
                 <div class="forCard one">
                   <img id="three" src="./上传图片.png"> <input type="file" id="threes" accept="image/*" enctype="multipart/form-data">
-                 <span>(上传传图片小于2M)</span>
+                 <span>(上传图片小于2M)</span>
                 </div>
               </div>
             </div>

@@ -32,9 +32,7 @@
           </ul>
         </transition>
       </div>
-
     </div>
-
 
     <!--轮播图-->
     <div class="swiper-container">
@@ -356,6 +354,7 @@
           }
         }
         &:last-child{
+            display: none;
           float:right;
           text-align:right;
           padding-right:0.5rem;
@@ -519,6 +518,7 @@
               }
             }
             .listR{
+            
               flex:1;
               padding:0.4rem;
               & > p{

@@ -71,7 +71,7 @@ export default new Router({
                             name: 'homepageC',
                             component: resolve => require(['../components/homepageC/homepageC.vue'], resolve),
                         }, {
-                            path: 'homepageSort/:id',
+                            path: 'homepageSort/:id/:name',
                             name: 'homepageSort',
                             component: resolve => require(['../components/homepageSort/homepageSort.vue'], resolve),
                         }
@@ -82,11 +82,11 @@ export default new Router({
                     name: 'spread',
                     component: resolve => require(['../components/spread/spread.vue'], resolve)
                 },
-              {
-                path: 'lding',
-                name: 'lding',
-                component: resolve => require(['../components/lding/lding.vue'], resolve)
-              },
+                {
+                    path: 'lding',
+                    name: 'lding',
+                    component: resolve => require(['../components/lding/lding.vue'], resolve)
+                },
                 {
                     path: 'conv',
                     name: 'conv',
@@ -188,58 +188,56 @@ export default new Router({
             /*支付*/
             component: resolve => require(['../components/paypage/paypage.vue'], resolve)
         },
-      {
-        path: '/pagea/:id',
-        name: 'pagea',
-        /*支付*/
-        component: resolve => require(['../components/paypage/pagea.vue'], resolve)
-      },
+        {
+            path: '/pagea/:id',
+            name: 'pagea',
+            /*支付*/
+            component: resolve => require(['../components/paypage/pagea.vue'], resolve)
+        },
         {
             path: '/gongyi',
             name: 'gongyi',
             /*gongyi*/
             component: resolve => require(['../components/publis_spirited/publis.vue'], resolve)
-        },{
-        path: '/code',
-        name: 'code',
-        /*code*/
-        component: resolve => require(['../components/code/code.vue'], resolve)
-      },
+        }, {
+            path: '/code',
+            name: 'code',
+            /*code*/
+            component: resolve => require(['../components/code/code.vue'], resolve)
+        },
         {
-        path: '/delist',
-        name: 'delist',
-        /*code*/
-        component: resolve => require(['../components/dellist/delist.vue'], resolve)
-      },
-      {
-        path: '/mingxi',
-        name: 'mingxi',
-        /*code*/
-        component: resolve => require(['../components/mingxi/mingxi.vue'], resolve)
-      }
-      ,{
-        path: '/codepay',
-        name: 'codepay',
-        /*code*/
-        component: resolve => require(['../components/codepay/codepay.vue'], resolve)
-      },{
-        path: '/help',
-        name: 'help',
-        /*code*/
-        component: resolve => require(['../components/help/help.vue'], resolve)
-      },
-      {
-        path: '/helpde',
-        name: 'helpde',
-        /*code*/
-        component: resolve => require(['../components/helpde/helpde.vue'], resolve)
-      }
-      ,{
-        path: '/goodcar',
-        name: 'goodcar',
-        /*code*/
-        component: resolve => require(['../components/goodcar/goodcar.vue'], resolve)
-      },
+            path: '/delist',
+            name: 'delist',
+            /*code*/
+            component: resolve => require(['../components/dellist/delist.vue'], resolve)
+        },
+        {
+            path: '/mingxi',
+            name: 'mingxi',
+            /*code*/
+            component: resolve => require(['../components/mingxi/mingxi.vue'], resolve)
+        }, {
+            path: '/codepay',
+            name: 'codepay',
+            /*code*/
+            component: resolve => require(['../components/codepay/codepay.vue'], resolve)
+        }, {
+            path: '/help',
+            name: 'help',
+            /*code*/
+            component: resolve => require(['../components/help/help.vue'], resolve)
+        },
+        {
+            path: '/helpde',
+            name: 'helpde',
+            /*code*/
+            component: resolve => require(['../components/helpde/helpde.vue'], resolve)
+        }, {
+            path: '/goodcar',
+            name: 'goodcar',
+            /*code*/
+            component: resolve => require(['../components/goodcar/goodcar.vue'], resolve)
+        },
         {
             path: '/orderAll',
             name: 'orderAll',
